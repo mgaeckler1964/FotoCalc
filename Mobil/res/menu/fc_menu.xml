@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android">
+  	<item android:visible="true" android:id="@+id/Berechnungen" android:enabled="true" android:title="Berechnungen">
+  		<menu>
+		    <item android:visible="true" android:enabled="true" android:title="Schärfentiefe" android:id="@+id/calcDOF"></item>
+		    <item android:title="Bildwinkel/KB Brennweite/Crop" android:id="@+id/calcAngle"></item>
+		    <item android:id="@+id/calcHyperDistance" android:enabled="true" android:title="Hyperfokale Entfernung" android:visible="true"></item>
+		    <item android:visible="true" android:title="Vergrößerungsfaktor" android:enabled="true" android:id="@+id/calcVergFaktor"></item>
+		    <item android:visible="true" android:id="@+id/rechneZeit" android:title="Zeit" android:enabled="true"></item>
+  		</menu>
+  	</item>
+    <item android:title="Größe" android:visible="true" android:id="@+id/standardSize" android:enabled="true">
+    	<menu>
+    		<item android:visible="true" android:enabled="true" android:title="Kleinbild" android:id="@+id/KleinBild"></item>
+    		<item android:visible="true" android:enabled="true" android:title="APS (Nikon)" android:id="@+id/apsNikon"></item>
+    		<item android:visible="true" android:enabled="true" android:title="(Micro) Four Thirds" android:id="@+id/fourThirds"></item>
+    		<item android:visible="true" android:enabled="true" android:title="Nikon-1" android:id="@+id/nikon1"></item>
+    		<item android:visible="true" android:enabled="true" android:title='1/1,7"' android:id="@+id/compact17"></item>
+    		<item android:visible="true" android:enabled="true" android:title='1/1,8"' android:id="@+id/compact18"></item>
+    		<item android:visible="true" android:enabled="true" android:title='1/2,3"' android:id="@+id/compact23"></item>
+    	</menu>
+	</item>
+	<item android:title="Über Fotorechner" android:id="@+id/about" android:visible="true" android:enabled="true"></item>
+	<item android:enabled="true" android:id="@+id/restart" android:title="Neustart" android:visible="true"></item><item android:visible="true" android:enabled="true" android:title="Beenden" android:id="@+id/exit"></item>
+	
+	
+</menu>

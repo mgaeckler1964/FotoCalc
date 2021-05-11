@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent">
+	<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+		<TextView android:id="@+id/textView1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Breite [mm]"></TextView>
+		<EditText android:layout_width="fill_parent" android:layout_height="wrap_content" android:inputType="numberDecimal" android:id="@+id/imageWidth">
+			<requestFocus></requestFocus>
+		</EditText>
+		<TextView android:text="Höhe [mm]" android:id="@+id/textView2" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+		<EditText android:layout_width="fill_parent" android:layout_height="wrap_content" android:inputType="numberDecimal" android:id="@+id/imageHeight"></EditText>
+		<TextView android:text="Brennweite [mm]" android:id="@+id/textView3" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+		<EditText android:layout_width="fill_parent" android:layout_height="wrap_content" android:inputType="number" android:id="@+id/focalLength"></EditText>
+		<TextView android:text="Blende" android:id="@+id/textView4" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+		<EditText android:layout_width="fill_parent" android:inputType="numberDecimal" android:layout_height="wrap_content" android:id="@+id/aperture"></EditText>
+		<TextView android:text="Entfernung [m]" android:id="@+id/textView5" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+		<EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:inputType="numberDecimal" android:id="@+id/distance"></EditText>
+		<TextView android:text="Zeit [1/s]" android:id="@+id/textView7" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+		<EditText android:layout_width="fill_parent" android:inputType="numberDecimal" android:layout_height="wrap_content" android:id="@+id/time"></EditText>
+		<TextView android:text="Graufilter" android:id="@+id/textView6" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+		<EditText android:layout_width="fill_parent" android:layout_height="wrap_content" android:inputType="number" android:id="@+id/greyFilter"></EditText>
+        <Button android:text="..." android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/buttonMenu"></Button>
+	</LinearLayout>
+</ScrollView>
