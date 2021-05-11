@@ -7,8 +7,6 @@ package com.gak.FotoCalc;
  *
  * <p>Copyright: Copyright (c) 2012</p>
  *
- * <p>Company: CRESD GmbH</p>
- *
  * @author not attributable
  * @version 1.1
  */

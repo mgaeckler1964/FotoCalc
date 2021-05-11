@@ -1,14 +1,13 @@
-Fotorechner 1.1.1 für JavaME und Android - (c) 2011-2012 by CRESD GmbH
-======================================================================
+Fotorechner 1.1.1 für JavaME und Android - (c) 2011-2021 by Martin Gäckler
+==========================================================================
 
 Dieses Programm berechnet verschiedene Werte der Fotografie. Dabei ist 
 aber zu beachten, daß es sich um Näherungswerte handelt, da die verwendeten
 Formeln nur für "dünne" Linsen gelten d.h. Gegenstandsweite und Bildweite 
 ergeben zusammen den Abstand des Objektes zum Film bzw. Sensor.
 
-Zur Installation der Programme installieren Sie bitte die Dateien foto.jar 
-für JavaME bzw. FotoCalc.apk für Android gemäß der Bedienungsanleitung Ihres
-Smartphones.
+Zur Installation der Programme installieren Sie bitte die Datei FotoCalc.apk 
+für Android gemäß der Bedienungsanleitung Ihres Smartphones.
 
 Folgende Werte können Sie eingeben:
 

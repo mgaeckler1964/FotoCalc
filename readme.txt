@@ -1,5 +1,5 @@
-Fotorechner 1.1.1 für Windows - (c) 2010-2012 by CRESD GmbH
-===========================================================
+Fotorechner 1.1.1 für Windows - (c) 2010-2021 by Martin Gäckler
+===============================================================
 
 Dieses Programm berechnet verschiedene Werte der Fotografie. Dabei ist 
 aber zu beachten, daß es sich um näherungswerte handelt, da die verwendeten
