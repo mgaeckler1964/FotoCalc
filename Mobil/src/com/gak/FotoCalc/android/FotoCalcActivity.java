@@ -1,11 +1,11 @@
 package com.gak.FotoCalc.android;
 
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.app.AlertDialog;
 import android.content.*;
@@ -56,14 +56,6 @@ public class FotoCalcActivity extends Activity
         focalLength.setText( settings.getString("focalLength", "") );
         imageHeight.setText( settings.getString("imageHeight", "") );
         imageWidth.setText( settings.getString("imageWidth", "") );
-        
-        Button buttonMenu = (Button) findViewById(R.id.buttonMenu);
-        buttonMenu.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-            	openOptionsMenu();
-            }
-        });
-
     }
     @Override
     public boolean onCreateOptionsMenu( android.view.Menu menu )
@@ -78,7 +70,7 @@ public class FotoCalcActivity extends Activity
     public boolean onOptionsItemSelected( MenuItem item )
     {
     	int	itemId = item.getItemId();
-    	System.out.println( itemId );
+    	//System.out.println( itemId );
     	switch( itemId )
     	{
     	case R.id.exit:
@@ -128,7 +120,7 @@ public class FotoCalcActivity extends Activity
     		imageHeight.setText("4.62");
     		break;   
     	case R.id.about:
-    		showResult( "Fotorechner", "Fotorechner 1.1.1\n(c) 2011-2021 by Martin Gäckler\nhttps://www.gaeckler.at/");
+    		showResult( "Fotorechner", "Fotorechner 2.6.4\n(c) 2011-2024 by Martin Gäckler\nhttps://www.gaeckler.at/");
     		break;
     	case R.id.restart:
             greyFilter.setText( "" );
@@ -143,6 +135,16 @@ public class FotoCalcActivity extends Activity
 
     	return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onOptionsMenuClosed(Menu menu) {
+        super.onOptionsMenuClosed(menu);
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.CUR_DEVELOPMENT) {
+            // Workaround for https://issuetracker.google.com/issues/315761686
+            invalidateOptionsMenu();
+        }
+    }
+    
     @Override
     public void onPause()
     {

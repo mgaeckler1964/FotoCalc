@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Mobiler Fotorechner</string>
+
+    <string name="imageWidth">Breite [mm]</string>
+    <string name="imageHeight">Höhe [mm]</string>
+    <string name="focalLength">Brennweite [mm]</string>
+    <string name="aperture">Blende</string>
+    <string name="distance">Entfernung [m]</string>
+    <string name="time">Zeit [1/s]</string>
+    <string name="greyFilter">Graufilter</string>
+
+    <string name="resultLabel">Neue Zeit</string>
+    <string name="buttonOK">Fertig</string>
+
 </resources>
