@@ -101,7 +101,7 @@ public class FotoCalculator
 
 		return resultString;
 	}
-	static public String calcVergFaktor( double distanz, double brennweite, double bildBreite, double bildHoehe )
+	static public String calcSizeFactor( double distanz, double brennweite, double bildBreite, double bildHoehe )
 	{
 		double	vergrFaktor = 0.0;
 		String	resultString = "Falsche Daten";

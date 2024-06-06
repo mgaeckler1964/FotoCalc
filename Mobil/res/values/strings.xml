@@ -13,4 +13,15 @@
     <string name="resultLabel">Neue Zeit</string>
     <string name="buttonOK">Fertig</string>
 
+    <string name="calcMenu">Berechnungen</string>
+    <string name="calcDOF">Schärfentiefe</string>
+    <string name="calcAngle">Bildwinkel/KB Brennweite/Crop</string>
+    <string name="calcHyperDistance">Hyperfokale Entfernung</string>
+    <string name="calcSizeFactor">Vergrößerungsfaktor</string>
+    <string name="calcTime">Zeit</string>
+    <string name="standardSize">Größe</string>
+    <string name="SmallPicture">Kleinbild</string>
+    <string name="about">Über Fotorechner</string>
+    <string name="restart">Neustart</string>
+    <string name="exit">Beenden</string>
 </resources>

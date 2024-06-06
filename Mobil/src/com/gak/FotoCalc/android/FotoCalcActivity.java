@@ -16,14 +16,14 @@ import com.gak.FotoCalc.FotoCalculator;
 public class FotoCalcActivity extends Activity
 {
 	// these variables are borrowed from FotoCalcForm for JavaME
-	double	width;
-	double	height;
-	double	bildGroesse;
-	double	brennweite;
-	double	blende;
-	double	distanz;
-	double	zeit;
-	double	graufilter;
+	double	m_width;
+	double	m_height;
+	double	m_picSize;
+	double	m_focalLength;
+	double	m_aperture;
+	double	m_distance;
+	double	m_time;
+	double	m_greyFilter;
 	static final int NEED_SIZE			= 1;
 	static final int NEED_FOCAL_LENGTH	= 2;
 	static final int NEED_APERTURE		= 4;
@@ -85,13 +85,13 @@ public class FotoCalcActivity extends Activity
     	case R.id.calcHyperDistance:
     		calcHyperDistance();
     		break;
-    	case R.id.calcVergFaktor:
-    		calcVergFaktor();
+    	case R.id.calcSizeFactor:
+    		calcSizeFactor();
     		break;
-    	case R.id.rechneZeit:
+    	case R.id.calcTime:
     		calcTime();
     		break;
-    	case R.id.KleinBild:
+    	case R.id.SmallPicture:
     		imageWidth.setText("36");
     		imageHeight.setText("24");
     		break;
@@ -193,20 +193,20 @@ public class FotoCalcActivity extends Activity
 	{
 		String	error = "";
 
-		width = -1;
-		height = -1;
-		brennweite = -1;
-		blende = -1;
-		distanz = -1;
-		bildGroesse = -1;
-		zeit = -1;
-		graufilter = -1;
+		m_width = -1;
+		m_height = -1;
+		m_focalLength = -1;
+		m_aperture = -1;
+		m_distance = -1;
+		m_picSize = -1;
+		m_time = -1;
+		m_greyFilter = -1;
 
 		if( (flags & NEED_FILTER) != 0 )
 		{
 			try
 			{
-				graufilter = Double.parseDouble(greyFilter.getText().toString());
+				m_greyFilter = Double.parseDouble(greyFilter.getText().toString());
 			}
 			catch (NumberFormatException e)
 			{
@@ -220,9 +220,9 @@ public class FotoCalcActivity extends Activity
 			try
 			{
 				String timeStr = time.getText().toString();
-				zeit = Double.parseDouble(timeStr);
+				m_time = Double.parseDouble(timeStr);
 				if (timeStr.indexOf('.') < 0)
-					zeit = 1.0 / zeit;
+					m_time = 1.0 / m_time;
 			}
 			catch (NumberFormatException e)
 			{
@@ -235,8 +235,8 @@ public class FotoCalcActivity extends Activity
 		{
 		try
 			{
-				distanz = Double.parseDouble(distance.getText().toString());
-				distanz *= 1000;
+				m_distance = Double.parseDouble(distance.getText().toString());
+				m_distance *= 1000;
 			}
 			catch (NumberFormatException e)
 			{
@@ -249,7 +249,7 @@ public class FotoCalcActivity extends Activity
 		{
 			try
 			{
-				blende = Double.parseDouble(aperture.getText().toString());
+				m_aperture = Double.parseDouble(aperture.getText().toString());
 			}
 			catch (NumberFormatException e)
 			{
@@ -262,7 +262,7 @@ public class FotoCalcActivity extends Activity
 		{
 			try
 			{
-				brennweite = Double.parseDouble(focalLength.getText().toString());
+				m_focalLength = Double.parseDouble(focalLength.getText().toString());
 			}
 			catch (NumberFormatException e)
 			{
@@ -275,7 +275,7 @@ public class FotoCalcActivity extends Activity
 		{
 			try
 			{
-				height = Double.parseDouble(imageHeight.getText().toString());
+				m_height = Double.parseDouble(imageHeight.getText().toString());
 			}
 			catch (NumberFormatException e)
 			{
@@ -284,15 +284,15 @@ public class FotoCalcActivity extends Activity
 			}
 			try
 			{
-				width = Double.parseDouble(imageWidth.getText().toString());
+				m_width = Double.parseDouble(imageWidth.getText().toString());
 			}
 			catch (NumberFormatException e)
 			{
 				if( (optional & NEED_SIZE) == 0 )
 					error = "Breite fehlt oder hat falsches Format";
 			}
-			if( width > 0 && height > 0 )
-				bildGroesse = Math.sqrt(width * width + height * height);
+			if( m_width > 0 && m_height > 0 )
+				m_picSize = Math.sqrt(m_width * m_width + m_height * m_height);
 		}
 
 		return error;
@@ -306,9 +306,9 @@ public class FotoCalcActivity extends Activity
 	{
 		String	resultString = getData( NEED_SIZE|NEED_FOCAL_LENGTH );
 
-		if( bildGroesse > 0 && brennweite > 0 )
+		if( m_picSize > 0 && m_focalLength > 0 )
 		{
-			resultString = FotoCalculator.calcAngle( bildGroesse, brennweite );
+			resultString = FotoCalculator.calcAngle( m_picSize, m_focalLength );
 		}
 
 		showResult( "Bildwinkel", resultString );
@@ -317,9 +317,9 @@ public class FotoCalcActivity extends Activity
 	{
 		String	resultString = getData(NEED_SIZE|NEED_FOCAL_LENGTH|NEED_APERTURE|NEED_DISTANCE);
 
-		if( bildGroesse > 0 && brennweite > 0 && blende > 0 && distanz > 0 )
+		if( m_picSize > 0 && m_focalLength > 0 && m_aperture > 0 && m_distance > 0 )
 		{
-			resultString = FotoCalculator.calcDOF(bildGroesse, brennweite, blende, distanz);
+			resultString = FotoCalculator.calcDOF(m_picSize, m_focalLength, m_aperture, m_distance);
 		}
 		showResult( "Schärfentiefe", resultString );
 	}
@@ -327,21 +327,21 @@ public class FotoCalcActivity extends Activity
 	{
 		String	resultString = getData(NEED_SIZE|NEED_FOCAL_LENGTH|NEED_APERTURE);
 
-		if( bildGroesse > 0 && brennweite > 0 && blende > 0 )
+		if( m_picSize > 0 && m_focalLength > 0 && m_aperture > 0 )
 		{
-			resultString = FotoCalculator.calcHyperDistance(bildGroesse, brennweite, blende);
+			resultString = FotoCalculator.calcHyperDistance(m_picSize, m_focalLength, m_aperture);
 		}
 
 		showResult( "Hyperfokale Entfernung", resultString );
 	}
 
-	private void calcVergFaktor()
+	private void calcSizeFactor()
 	{
 		String	resultString = getData(NEED_DISTANCE|NEED_FOCAL_LENGTH|NEED_SIZE, NEED_SIZE);
 
-		if( distanz>0 && brennweite>0 )
+		if( m_distance>0 && m_focalLength>0 )
 		{
-			resultString = FotoCalculator.calcVergFaktor( distanz, brennweite, width, height );
+			resultString = FotoCalculator.calcSizeFactor( m_distance, m_focalLength, m_width, m_height );
 		}
 
 		showResult( "Vergrößerungsfaktor", resultString );
@@ -351,11 +351,11 @@ public class FotoCalcActivity extends Activity
 		double	neueZeit;
 		String	resultString = getData(NEED_TIME|NEED_FILTER);
 
-		if( zeit > 0 && graufilter > 0 )
+		if( m_time > 0 && m_greyFilter > 0 )
 		{
-			neueZeit = zeit * graufilter;
+			neueZeit = m_time * m_greyFilter;
 			getData(NEED_APERTURE);
-    		showTimeResult( neueZeit, blende );
+    		showTimeResult( neueZeit, m_aperture );
 		}
 		else
 		{
