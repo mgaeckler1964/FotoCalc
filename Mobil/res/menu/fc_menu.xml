@@ -16,6 +16,7 @@
     		<item android:visible="true" android:enabled="true" android:title="APS (Nikon)" android:id="@+id/apsNikon"></item>
     		<item android:visible="true" android:enabled="true" android:title="(Micro) Four Thirds" android:id="@+id/fourThirds"></item>
     		<item android:visible="true" android:enabled="true" android:title="Nikon-1" android:id="@+id/nikon1"></item>
+    		<item android:visible="true" android:enabled="true" android:title='Samsung A55' android:id="@+id/SamsungA55"></item>
     		<item android:visible="true" android:enabled="true" android:title='1/1,7"' android:id="@+id/compact17"></item>
     		<item android:visible="true" android:enabled="true" android:title='1/1,8"' android:id="@+id/compact18"></item>
     		<item android:visible="true" android:enabled="true" android:title='1/2,3"' android:id="@+id/compact23"></item>

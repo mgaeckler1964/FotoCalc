@@ -137,7 +137,11 @@ public class FotoCalcActivity extends Activity
     	case R.id.nikon1:
     		imageWidth.setText("13.2");
     		imageHeight.setText("8.8");
-    		break;   
+    		break;
+    	case R.id.SamsungA55:
+    		imageWidth.setText("8.16");
+    		imageHeight.setText("6.12");
+    		break;
     	case R.id.compact17:
     		imageWidth.setText("7.6");
     		imageHeight.setText("5.7");
@@ -151,7 +155,7 @@ public class FotoCalcActivity extends Activity
     		imageHeight.setText("4.62");
     		break;   
     	case R.id.about:
-    		showResult( "Fotorechner", "Fotorechner 2.6.4\n(c) 2011-2024 by Martin Gäckler\nhttps://www.gaeckler.at/");
+    		showResult( "Fotorechner", "Fotorechner 2.6.5\n(c) 2011-2025 by Martin Gäckler\nhttps://www.gaeckler.at/");
     		break;
     	case R.id.restart:
             greyFilter.setText( "" );
