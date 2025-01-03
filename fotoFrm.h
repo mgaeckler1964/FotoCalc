@@ -89,6 +89,10 @@ __published:	// Von der IDE verwaltete Komponenten
 	TMenuItem *Nikon11;
 	TMenuItem *N1231;
 	TMenuItem *Diagonale2163mm;
+	TMenuItem *SamsungA551;
+	TMenuItem *Breite816mm1;
+	TMenuItem *Hhe612mm1;
+	TMenuItem *Diagonale1012mm1;
 	void __fastcall ButtonRechneVergrClick(TObject *Sender);
 	void __fastcall ButtonRechneDistanzClick(TObject *Sender);
 	void __fastcall ButtonNeustartClick(TObject *Sender);
@@ -119,6 +123,9 @@ __published:	// Von der IDE verwaltete Komponenten
 	void __fastcall Breite616mmClick(TObject *Sender);
 	void __fastcall Hhe462mmClick(TObject *Sender);
 	void __fastcall Diagonale77mmClick(TObject *Sender);
+	void __fastcall Breite816mm1Click(TObject *Sender);
+	void __fastcall Hhe612mm1Click(TObject *Sender);
+	void __fastcall Diagonale1012mm1Click(TObject *Sender);
 private:	// Anwender-Deklarationen
 	enum AUTO_RECHNE {
 		AUTO_NIX, AUTO_FAKTOR, AUTO_DISTANZ

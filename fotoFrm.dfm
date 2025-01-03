@@ -1,6 +1,6 @@
 object FotorechnerForm: TFotorechnerForm
-  Left = 582
-  Top = 433
+  Left = 725
+  Top = 248
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'Fotorechner'
@@ -258,6 +258,21 @@ object FotorechnerForm: TFotorechnerForm
       object Diagonale95mm: TMenuItem
         Caption = 'Diagonale (9,5mm)'
         OnClick = Diagonale95mmClick
+      end
+    end
+    object SamsungA551: TMenuItem
+      Caption = 'Samsung A55'
+      object Breite816mm1: TMenuItem
+        Caption = 'Breite (8,16mm)'
+        OnClick = Breite816mm1Click
+      end
+      object Hhe612mm1: TMenuItem
+        Caption = 'Höhe (6,12mm)'
+        OnClick = Hhe612mm1Click
+      end
+      object Diagonale1012mm1: TMenuItem
+        Caption = 'Diagonale (10,12mm)'
+        OnClick = Diagonale1012mm1Click
       end
     end
     object Nikon11: TMenuItem

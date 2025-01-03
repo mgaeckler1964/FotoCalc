@@ -534,3 +534,21 @@ void __fastcall TFotorechnerForm::Diagonale77mmClick(TObject *)
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TFotorechnerForm::Breite816mm1Click(TObject *)
+{
+	EditBildGroesse->Text = "8.16";
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFotorechnerForm::Hhe612mm1Click(TObject *)
+{
+	EditBildGroesse->Text = "6.12";
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFotorechnerForm::Diagonale1012mm1Click(TObject *)
+{
+	EditBildGroesse->Text = "10.12";
+}
+//---------------------------------------------------------------------------
+

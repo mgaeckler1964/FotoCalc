@@ -53,7 +53,7 @@ AutoIncBuild=1
 MajorVer=1
 MinorVer=1
 Release=1
-Build=28
+Build=30
 Debug=0
 PreRelease=0
 Special=0
@@ -65,7 +65,7 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=CRESD GmbH
 FileDescription=Foto Calculator
-FileVersion=1.1.1.28
+FileVersion=1.1.1.30
 InternalName=Foto Calculator
 LegalCopyright=(c) 2010-2012 by CRESD GmbH
 LegalTrademarks=
@@ -119,11 +119,11 @@ AddClientUnit=1
 PrecompiledHeaders=1
 
 [Resource DLL Projects]
-Item0=Englisch (USA)*0x00000409*ENU*ENU
+Item0=Englisch (Vereinigte Staaten)*0x00000409*ENU*ENU
 
 [Language]
 ActiveLang=
 ProjectLang=0x00000407
-RootDir=C:\CRESD\Source\foto\
+RootDir=C:\CRESD\Source\FotoCalc\
   </IDEOPTIONS>
 </PROJECT>
