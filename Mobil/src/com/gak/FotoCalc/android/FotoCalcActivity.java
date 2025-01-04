@@ -155,7 +155,16 @@ public class FotoCalcActivity extends Activity
     		imageHeight.setText("4.62");
     		break;   
     	case R.id.about:
-    		showResult( "Fotorechner", "Fotorechner 2.6.5\n(c) 2011-2025 by Martin Gäckler\nhttps://www.gaeckler.at/");
+    		String name = getString(R.string.app_name);
+    		String version = getString(R.string.app_version);
+    		String copyinfo = getString(R.string.app_copyinfo);
+    		String url = getString(R.string.app_url);
+    		showResult( 
+    			name, 
+    			name + " " + version + "\n" +
+    			copyinfo + "\n" +
+    			url
+    		);
     		break;
     	case R.id.restart:
             greyFilter.setText( "" );

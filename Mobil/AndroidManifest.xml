@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.gak.FotoCalc.android" android:versionName="2.6.5" android:versionCode="7" 
+<manifest package="com.gak.FotoCalc.android" android:versionName="@string/app_version"  android:versionCode="8" 
     xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-sdk android:minSdkVersion="19" android:targetSdkVersion="23"/>
 

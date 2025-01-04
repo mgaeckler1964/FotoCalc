@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Mobiler Fotorechner</string>
-
+    <string name="app_version">3.1.4</string>
+    <string name="app_copyinfo">&#169; 2011&#8211;2025 by Martin Gäckler</string>
+    <string name="app_url">https://www.gaeckler.at/</string>
+    
     <string name="imageWidth">Breite [mm]</string>
     <string name="imageHeight">Höhe [mm]</string>
     <string name="focalLength">Brennweite [mm]</string>
