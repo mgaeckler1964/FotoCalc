@@ -89,3 +89,9 @@ lint/tmp/
 *.dsk
 *.bak
 
+# Visual Studio
+*.user
+*.suo
+*.sdf
+*.bak
+ipch/

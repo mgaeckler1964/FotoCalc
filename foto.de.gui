@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<gui>
+<forms>
+<form name="FotoFORM" style="281673728" width="590" height="254" caption="Fotorechner" id="128" baseClass="PopupWindow">
+<layoutManager type="TableManager" marginLeft="5" marginRight="5" marginTop="5" marginBottom="5" />
+<child type="Label" name="" caption="Objektgröße [mm]" x="27" y="37" width="0" height="0" style="1342242827">
+<layout x="0" y="0" width="1" height="1" growWidth="0" growHeight="0" paddingLeft="2" paddingRight="2" paddingTop="2" paddingBottom="2" />
+</child>
+<child type="EditControl" name="EditObjektGroesse" caption="" x="165" y="15" width="80" height="25" style="1350631808" id="154">
+<layout x="1" y="0" width="1" height="1" growWidth="10" paddingLeft="2" paddingRight="2" paddingTop="2" paddingBottom="2" />
+</child>
+<child type="Label" name="LabelDistanz" caption="Distanz" x="265" y="39" width="80" height="25" style="1342242827" id="155">
+<layout x="2" y="0" width="1" height="1" paddingLeft="2" paddingRight="2" paddingTop="2" paddingBottom="2" />
+</child>
+<child type="EditControl" name="EditDistanz" caption="" x="304" y="16" width="80" height="24" style="1350631808" id="156">
+<layout x="3" y="0" width="1" height="1" growWidth="10" paddingLeft="2" paddingRight="2" paddingTop="2" paddingBottom="2" />
+</child>
+<child type="PushButton" name="ButtonRechneDistanz" caption="Berechne" x="412" y="11" width="80" height="25" style="1342242816" id="157">
+<layout x="4" y="0" paddingLeft="2" paddingRight="2" paddingTop="2" paddingBottom="2" />
+</child>
+<child type="Label" name="" caption="Bildgröße [mm]" x="23" y="40" width="0" height="0" style="1342242827">
+<layout x="0" y="1" paddingLeft="2" paddingRight="2" paddingTop="2" paddingBottom="2" />
+</child>
+<child type="EditControl" name="EditBildGroesse" caption="" x="116" y="29" width="80" height="25" style="1350631808" id="158">
+<layout x="1" y="1" growWidth="10" paddingLeft="2" paddingRight="2" paddingTop="2" paddingBottom="2" />
+</child>
+<child type="Label" name="" caption="Brennweite" x="310" y="34" width="0" height="0" style="1342242827">
+<layout x="2" y="1" paddingLeft="2" paddingRight="2" paddingTop="2" paddingBottom="2" />
+</child>
+<child type="EditControl" name="EditBrennweite" caption="" x="388" y="30" width="80" height="25" style="1350631808" id="159">
+<layout x="3" y="1" growWidth="10" width="1" height="1" paddingLeft="2" paddingRight="2" paddingTop="2" paddingBottom="2" />
+</child>
+<child type="Label" name="" caption="Bildwinkel" x="22" y="80" width="0" height="0" style="1342242827">
+<layout x="0" y="2" paddingLeft="2" paddingRight="2" paddingTop="2" paddingBottom="2" />
+</child>
+<child type="EditControl" name="EditBildwinkel" caption="" x="128" y="64" width="80" height="25" style="1350631808" id="160">
+<layout x="1" y="2" growWidth="10" paddingLeft="2" paddingRight="2" paddingTop="2" paddingBottom="2" />
+</child>
+<child type="Label" name="LabelFaktor" caption="Vergrfaktor" x="297" y="62" width="80" height="25" style="1342242827" id="161">
+<layout x="2" y="2" paddingLeft="2" paddingRight="2" paddingTop="2" paddingBottom="2" />
+</child>
+<child type="EditControl" name="EditVergrFaktor" caption="" x="384" y="64" width="80" height="25" style="1350631808" id="162">
+<layout x="3" y="2" width="1" height="1" growWidth="10" growHeight="0" paddingLeft="2" paddingRight="2" paddingTop="2" paddingBottom="2" />
+</child>
+<child type="PushButton" name="ButtonRechneVergr" caption="Berechne" x="547" y="58" width="80" height="25" style="1342242816" id="163">
+<layout x="4" y="2" paddingLeft="2" paddingRight="2" paddingTop="2" paddingBottom="2" />
+</child>
+<child type="Label" name="" caption="Hyp. Entf [m]" x="19" y="136" width="0" height="0" style="1342242827">
+<layout x="0" y="3" paddingLeft="2" paddingRight="2" paddingTop="2" paddingBottom="2" />
+</child>
+<child type="EditControl" name="EditHyperfokaleDistanz" caption="" x="152" y="96" width="80" height="25" style="1350631808" id="164">
+<layout x="1" y="3" growWidth="10" paddingLeft="2" paddingRight="2" paddingTop="2" paddingBottom="2" />
+</child>
+<child type="Label" name="" caption="Blende" x="304" y="96" width="80" height="25" style="1342242827">
+<layout x="2" y="3" paddingLeft="2" paddingRight="2" paddingTop="2" paddingBottom="2" />
+</child>
+<child type="EditControl" name="EditBlende" caption="" x="384" y="96" width="80" height="25" style="1350631808" id="165">
+<layout x="3" y="3" growWidth="10" paddingLeft="2" paddingRight="2" paddingTop="2" paddingBottom="2" />
+</child>
+<child type="Label" name="" caption="Min. Entf." x="35" y="211" width="0" height="0" style="1342242827">
+<layout x="0" y="4" paddingLeft="2" paddingRight="2" paddingTop="2" paddingBottom="2" />
+</child>
+<child type="EditControl" name="EditMinDistanz" caption="" x="160" y="152" width="80" height="25" style="1350631808" id="166">
+<layout x="1" y="4" growWidth="10" paddingLeft="2" paddingRight="2" paddingTop="2" paddingBottom="2" />
+</child>
+<child type="Label" name="" caption="Max. Entf." x="296" y="128" width="80" height="25" style="1342242827">
+<layout x="2" y="4" paddingLeft="2" paddingRight="2" paddingTop="2" paddingBottom="2" />
+</child>
+<child type="EditControl" name="EditMaxDistanz" caption="" x="408" y="136" width="80" height="25" style="1350631808" id="167">
+<layout x="3" y="4" growWidth="10" paddingLeft="2" paddingRight="2" paddingTop="2" paddingBottom="2" />
+</child>
+<child type="Label" name="" caption="135: 24mm * 36mm,   APS: 15,8mm * 23,6mm,   1/1,7': 5,7mm * 7,6mm,   1/1,8': 5,32mm * 7,18mm" x="26" y="140" width="0" height="25" style="1342242827">
+<layout x="0" y="5" width="5" paddingLeft="2" paddingRight="2" paddingTop="2" paddingBottom="2" />
+</child>
+<child type="PushButton" name="ButtonLanguage" caption="English" x="35" y="190" width="80" height="25" style="1342242816" id="168">
+<layout x="0" y="6" paddingLeft="2" paddingRight="2" paddingTop="2" paddingBottom="2" />
+</child>
+<child type="PushButton" name="ButtonNeustart" caption="Neustart" x="552" y="200" width="80" height="25" style="1342242816" id="169">
+<layout x="4" y="6" paddingLeft="2" paddingRight="2" paddingTop="2" paddingBottom="2" />
+</child>
+</form>
+</forms>
+<menus>
+<menu name="SizeMenu" caption="Größe" id="153">
+<menu caption="Kleinbild">
+<menu caption="Breite (36mm)" name="SPWidth36mm" id="129" />
+<menu caption="Höhe (24mm)" name="SpHeight24mm" id="130" />
+<menu caption="Diagonale (43,27mm)" name="SpDiagonal4327mm" id="131" />
+</menu>
+<menu caption="APS (Nikon)">
+<menu caption="Breite (23,6mm)" name="ApsWidth236mm" id="132" />
+<menu caption="Höhe (15,8mm)" name="ApsHeight158mm" id="133" />
+<menu caption="Diagonale (28,4mm)" name="ApsDiagonal284mm" id="134" />
+</menu>
+<menu caption="(Micro) Four Thirds">
+<menu caption="Breite (17,31mm)" name="MicroFourThirdsWidth1731mm" id="135" />
+<menu caption="Höhe (19,98mm)" name="MicroFourThirdsHeight1998mm" id="136" />
+<menu caption="Diagonale (21,63mm)" name="MicroFourThirdsDiagonal2163mm" id="137" />
+</menu>
+<menu caption="Nikon-1">
+<menu caption="Breite (13,2mm)" name="Nikon1width132mm" id="138" />
+<menu caption="Höhe (8,8mm)" name="Nikon1Height88mm" id="139" />
+<menu caption="Diagonale (15,86mm)" name="Nikon1Diagonal1586mm" id="140" />
+</menu>
+<menu caption="Samsung A55">
+<menu caption="Breite (8,16mm)" name="SamsungWidth816mm" id="141" />
+<menu caption="Höhe (6,12mm)" name="SamsungHeight612mm" id="142" />
+<menu caption="Diagonale (10,12mm)" name="SamsungDiagonal1012mm" id="143" />
+</menu>
+<menu caption="KB">
+<menu caption="Breite (7,6mm)" name="Width76mm" id="144" />
+<menu caption="Höhe (5,7mm)" name="Height57mm" id="145" />
+<menu caption="Diagonale (9,5mm)" name="Diagonal95mm" id="146" />
+</menu>
+<menu caption="1/1.8'" name="">
+<menu caption="Breite (7,18mm)" name="Width718mm" id="147" />
+<menu caption="Höhe (5,32mm)" name="Height532mm" id="148" />
+<menu caption="Diagonale (8,93mm)" name="Diagonal893mm" id="149" />
+</menu>
+<menu caption="1/2.3'">
+<menu caption="Breite (6,16mm)" name="Width (6.16mm)" id="150" />
+<menu caption="Höhe (4,62mm)" name="Height (4.62mm)" id="151" />
+<menu caption="Diagonale (7,7mm)" name="Diagonal (7.7mm)" id="152" />
+</menu>
+</menu>
+</menus>
+</gui>

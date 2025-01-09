@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<translations>
+<language lang="de">
+<item caption="135 Film" translation="Kleinbild" />
+<item caption="1/1,7'" translation="KB" />
+<item caption="Aperture" translation="Blende" />
+<item caption="Calculate" translation="Berechne" />
+<item caption="Deutsch" translation="English" />
+<item caption="Diagonal (10.12mm)" translation="Diagonale (10,12mm)" />
+<item caption="Diagonal (15.86mm)" translation="Diagonale (15,86mm)" />
+<item caption="Diagonal (21.63mm)" translation="Diagonale (21,63mm)" />
+<item caption="Diagonal (28.4mm)" translation="Diagonale (28,4mm)" />
+<item caption="Diagonal (43.27mm)" translation="Diagonale (43,27mm)" />
+<item caption="Diagonal (7.7mm)" translation="Diagonale (7,7mm)" />
+<item caption="Diagonal (8.93mm)" translation="Diagonale (8,93mm)" />
+<item caption="Diagonal (9.5mm)" translation="Diagonale (9,5mm)" />
+<item caption="Distance [m]" translation="Distanz" />
+<item caption="Factor" translation="Vergrfaktor" />
+<item caption="FocalLength [mm]" translation="Brennweite" />
+<item caption="Foto Calculator" translation="Fotorechner" />
+<item caption="Height (15.8mm)" translation="Höhe (15,8mm)" />
+<item caption="Height (19.98mm)" translation="Höhe (19,98mm)" />
+<item caption="Height (24mm)" translation="Höhe (24mm)" />
+<item caption="Height (4.62mm)" translation="Höhe (4,62mm)" />
+<item caption="Height (5.32mm)" translation="Höhe (5,32mm)" />
+<item caption="Height (5.7mm)" translation="Höhe (5,7mm)" />
+<item caption="Height (6.12mm)" translation="Höhe (6,12mm)" />
+<item caption="Height (8.8mm)" translation="Höhe (8,8mm)" />
+<item caption="Hyp. dist. [m]" translation="Hyp. Entf [m]" />
+<item caption="Max. Dist [m]" translation="Max. Entf." />
+<item caption="Min. Dist. [m]" translation="Min. Entf." />
+<item caption="Object Size [mm]:" translation="Objektgröße [mm]" />
+<item caption="Picture Angel" translation="Bildwinkel" />
+<item caption="Picture Size [mm]" translation="Bildgröße [mm]" />
+<item caption="Restart" translation="Neustart" />
+<item caption="Size" translation="Größe" />
+<item caption="Width (13.2mm)" translation="Breite (13,2mm)" />
+<item caption="Width (17.31mm)" translation="Breite (17,31mm)" />
+<item caption="Width (23.6mm)" translation="Breite (23,6mm)" />
+<item caption="Width (36mm)" translation="Breite (36mm)" />
+<item caption="Width (6.16mm)" translation="Breite (6,16mm)" />
+<item caption="Width (7.18mm)" translation="Breite (7,18mm)" />
+<item caption="Width (7.6mm)" translation="Breite (7,6mm)" />
+<item caption="Width (8.16mm)" translation="Breite (8,16mm)" />
+</language>
+</translations>
