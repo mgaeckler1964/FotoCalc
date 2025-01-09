@@ -70,7 +70,7 @@
 <child type="EditControl" name="EditMaxDistanz" caption="" x="408" y="136" width="80" height="25" style="1350631808" id="167">
 <layout x="3" y="4" growWidth="10" paddingLeft="2" paddingRight="2" paddingTop="2" paddingBottom="2" />
 </child>
-<child type="Label" name="" caption="135: 24mm * 36mm,   APS: 15,8mm * 23,6mm,   1/1,7': 5,7mm * 7,6mm,   1/1,8': 5,32mm * 7,18mm" x="26" y="140" width="0" height="25" style="1342242827">
+<child type="Label" name="" caption="KB: 24mm * 36mm,   APS: 15,8mm * 23,6mm,   1/1,7': 5,7mm * 7,6mm,   1/1,8': 5,32mm * 7,18mm" x="26" y="140" width="0" height="25" style="1342242827">
 <layout x="0" y="5" width="5" paddingLeft="2" paddingRight="2" paddingTop="2" paddingBottom="2" />
 </child>
 <child type="PushButton" name="ButtonLanguage" caption="English" x="35" y="190" width="80" height="25" style="1342242816" id="168">
@@ -108,17 +108,17 @@
 <menu caption="Höhe (6,12mm)" name="SamsungHeight612mm" id="142" />
 <menu caption="Diagonale (10,12mm)" name="SamsungDiagonal1012mm" id="143" />
 </menu>
-<menu caption="KB">
+<menu caption="1/1,7'">
 <menu caption="Breite (7,6mm)" name="Width76mm" id="144" />
 <menu caption="Höhe (5,7mm)" name="Height57mm" id="145" />
 <menu caption="Diagonale (9,5mm)" name="Diagonal95mm" id="146" />
 </menu>
-<menu caption="1/1.8'" name="">
+<menu caption="1/1,8'" name="">
 <menu caption="Breite (7,18mm)" name="Width718mm" id="147" />
 <menu caption="Höhe (5,32mm)" name="Height532mm" id="148" />
 <menu caption="Diagonale (8,93mm)" name="Diagonal893mm" id="149" />
 </menu>
-<menu caption="1/2.3'">
+<menu caption="1/2,3'">
 <menu caption="Breite (6,16mm)" name="Width (6.16mm)" id="150" />
 <menu caption="Höhe (4,62mm)" name="Height (4.62mm)" id="151" />
 <menu caption="Diagonale (7,7mm)" name="Diagonal (7.7mm)" id="152" />

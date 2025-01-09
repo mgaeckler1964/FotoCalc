@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="iso-8859-1" ?>
 <translations>
 <language lang="de">
+<item caption="135: 24mm * 36mm,   APS: 15,8mm * 23,6mm,   1/1,7': 5,7mm * 7,6mm,   1/1,8': 5,32mm * 7,18mm" translation="KB: 24mm * 36mm,   APS: 15,8mm * 23,6mm,   1/1,7': 5,7mm * 7,6mm,   1/1,8': 5,32mm * 7,18mm" />
 <item caption="135 Film" translation="Kleinbild" />
-<item caption="1/1,7'" translation="KB" />
+<item caption="1/1.7'" translation="1/1,7'" />
+<item caption="1/1.8'" translation="1/1,8'" />
+<item caption="1/2.3'" translation="1/2,3'" />
 <item caption="Aperture" translation="Blende" />
 <item caption="Calculate" translation="Berechne" />
 <item caption="Deutsch" translation="English" />

@@ -121,7 +121,7 @@ namespace winlibGUI {
 "<menu caption=\"Height (6.12mm)\" name=\"SamsungHeight612mm\" id=\"142\" />\n"
 "<menu caption=\"Diagonal (10.12mm)\" name=\"SamsungDiagonal1012mm\" id=\"143\" />\n"
 "</menu>\n"
-"<menu caption=\"1/1,7\'\">\n"
+"<menu caption=\"1/1.7\'\">\n"
 "<menu caption=\"Width (7.6mm)\" name=\"Width76mm\" id=\"144\" />\n"
 "<menu caption=\"Height (5.7mm)\" name=\"Height57mm\" id=\"145\" />\n"
 "<menu caption=\"Diagonal (9.5mm)\" name=\"Diagonal95mm\" id=\"146\" />\n"
