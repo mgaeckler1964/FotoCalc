@@ -1,7 +1,7 @@
 # FotoCalc
 Fotografische Berechnungen wie Schärfentiefe oder hyperfokale Distanz etc.
 
-Zum Übersetzen benötigst Du den Borland C++ Builder, Android Developper Tools oder Java ME.
+Zum Übersetzen benötigst Du einen C++ Compiler, Android Developper Tools oder Java ME.
 
 Fertige Binaries gibt's hier: https://www.gaeckler.at/Software/software.htm#FotoCalc
 
