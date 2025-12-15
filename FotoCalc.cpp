@@ -42,6 +42,7 @@
 #include <gak/fmtNumber.h>
 
 #include <WINLIB/WINAPP.H>
+#include <WINLIB/DEVICE.H>
 
 #include "FotoCalc_rc.h"
 #include "foto.gui.h"
@@ -225,7 +226,7 @@ void FotoMainWindow::rechneVergFaktor( void )
 	if( vergrFaktor > 0.005 )
 	{
 		sprintf( buffer, "%.2f", vergrFaktor );
-		EditVergrFaktor->setBackgroundColorByRef( 0xAAFFAA );
+		EditVergrFaktor->setBackgroundColorByRef( colors::PALE_GREEN );
 		EditVergrFaktor->setTag(1);
 		EditVergrFaktor->setText( buffer );
 		EditVergrFaktor->setTag(0);
@@ -233,7 +234,7 @@ void FotoMainWindow::rechneVergFaktor( void )
 			this->rechneBildgroesse();
 	}
 	else if( vergrFaktor < 0 )
-		EditVergrFaktor->setBackgroundColorByRef( 0xAAAAFF );
+		EditVergrFaktor->setBackgroundColorByRef( colors::SALMON );
 
 }
 
@@ -254,7 +255,7 @@ void FotoMainWindow::rechneBildgroesse( void )
 	if( *buffer )
 	{
 		EditBildGroesse->setTag(1);
-		EditBildGroesse->setBackgroundColorByRef( 0xAAFFAA );
+		EditBildGroesse->setBackgroundColorByRef( colors::PALE_GREEN );
 		EditBildGroesse->setText( buffer );
 		EditBildGroesse->setTag(0);
 		autoBildGroesse = true;
@@ -278,7 +279,7 @@ void FotoMainWindow::rechneDistanz( void )
 	if( *buffer )
 	{
 		EditDistanz->setTag(1);
-		EditDistanz->setBackgroundColorByRef( 0xAAFFAA );
+		EditDistanz->setBackgroundColorByRef( colors::PALE_GREEN );
 		EditDistanz->setText( buffer );
 		EditDistanz->setTag(0);
 	}
@@ -295,7 +296,7 @@ void FotoMainWindow::rechneBildwinkel( void )
 	{
 		bildwinkel = 360 * atan( bildGroesse / (2*brennweite) ) / M_PI;
 		sprintf( buffer, "%.2f", bildwinkel );
-		EditBildwinkel->setBackgroundColorByRef( 0xAAFFAA );
+		EditBildwinkel->setBackgroundColorByRef( colors::PALE_GREEN );
 		EditBildwinkel->setText( buffer );
 	}
 }
@@ -314,14 +315,14 @@ void FotoMainWindow::rechneSchaerfentiefe( void )
 		double hyperfokaleEntfernung = brennweite*brennweite / (blende*zerstreuungskreis) + brennweite;
 
 		sprintf( buffer, "%.3f", hyperfokaleEntfernung/1000 );
-		EditHyperfokaleDistanz->setBackgroundColorByRef( 0xAAFFAA );
+		EditHyperfokaleDistanz->setBackgroundColorByRef( colors::PALE_GREEN );
 		EditHyperfokaleDistanz->setText( buffer );
 
 		if( distanz > 0 )
 		{
 			double minDistanz = distanz*hyperfokaleEntfernung / (hyperfokaleEntfernung+distanz-brennweite);
 			sprintf( buffer, "%.3f", minDistanz/1000 );
-			EditMinDistanz->setBackgroundColorByRef( 0xAAFFAA );
+			EditMinDistanz->setBackgroundColorByRef( colors::PALE_GREEN );
 			EditMinDistanz->setText( buffer );
 
 			double quotient = hyperfokaleEntfernung-distanz+brennweite;
@@ -338,7 +339,7 @@ void FotoMainWindow::rechneSchaerfentiefe( void )
 				EditMaxDistanz->setText( "\xA5" );
 			}
 
-			EditMaxDistanz->setBackgroundColorByRef( 0xAAFFAA );
+			EditMaxDistanz->setBackgroundColorByRef( colors::PALE_GREEN );
 		}
 	}
 }
@@ -350,7 +351,7 @@ void FotoMainWindow::EditGroesseChange(EditControl *Sender)
 		if( Sender == EditBildGroesse )
 		{
 			autoBildGroesse = false;
-			EditBildGroesse->setBackgroundColorByRef( 0xFFFFFF );
+			EditBildGroesse->setBackgroundColorByRef( colors::WHITE );
 		}
 
 		if( autoBildGroesse )
@@ -373,7 +374,7 @@ void FotoMainWindow::EditGroesseChange(EditControl *Sender)
 			if( *buffer )
 			{
 				EditVergrFaktor->setTag(1);
-				EditVergrFaktor->setBackgroundColorByRef( 0xAAFFAA );
+				EditVergrFaktor->setBackgroundColorByRef( colors::PALE_GREEN );
 				EditVergrFaktor->setText( buffer );
 				EditVergrFaktor->setTag(0);
 				rechneDistanz();
@@ -397,7 +398,7 @@ void FotoMainWindow::EditDistanzChange(EditControl *Sender)
 
 		LabelDistanz->getFont().setNormal();
 		LabelFaktor->getFont().setBold();
-		EditDistanz->setBackgroundColorByRef(0xFFFFFF);
+		EditDistanz->setBackgroundColorByRef( colors::WHITE );
 		invalidateWindow();
 	}
 	rechneSchaerfentiefe();
@@ -436,7 +437,7 @@ void FotoMainWindow::EditVergrFaktorChange(EditControl *Sender)
 {
 	if( !Sender->getTag() )
 	{
-		EditVergrFaktor->setBackgroundColorByRef( 0xFFFFFF );
+		EditVergrFaktor->setBackgroundColorByRef( colors::WHITE );
 		rechneBildgroesse();
 		rechneDistanz();
 		autoRechne = AUTO_DISTANZ;
@@ -609,21 +610,21 @@ ProcessStatus FotoMainWindow::handleButtonClick( int buttonID )
 		case ButtonNeustart_id:
 		{
 			autoBildGroesse = true;
-			EditDistanz->setBackgroundColorByRef(0xFFFFFF);
+			EditDistanz->setBackgroundColorByRef(colors::WHITE);
 			EditDistanz->setText( "" );
 			EditBrennweite->setText( "" );
 			EditVergrFaktor->setText( "" );
-			EditVergrFaktor->setBackgroundColorByRef(0xFFFFFF);
+			EditVergrFaktor->setBackgroundColorByRef(colors::WHITE);
 			EditObjektGroesse->setText( "" );
-			EditBildGroesse->setBackgroundColorByRef(0xFFFFFF);
+			EditBildGroesse->setBackgroundColorByRef(colors::WHITE);
 			EditBildGroesse->setText( "" );
-			EditBildwinkel->setBackgroundColorByRef(0xFFFFFF);
+			EditBildwinkel->setBackgroundColorByRef(colors::WHITE);
 			EditBildwinkel->setText( "" );
-			EditHyperfokaleDistanz->setBackgroundColorByRef(0xFFFFFF);
+			EditHyperfokaleDistanz->setBackgroundColorByRef(colors::WHITE);
 			EditHyperfokaleDistanz->setText( "" );
-			EditMinDistanz->setBackgroundColorByRef(0xFFFFFF);
+			EditMinDistanz->setBackgroundColorByRef(colors::WHITE);
 			EditMinDistanz->setText( "" );
-			EditMaxDistanz->setBackgroundColorByRef(0xFFFFFF);
+			EditMaxDistanz->setBackgroundColorByRef(colors::WHITE);
 			EditMaxDistanz->setText( "" );
 			EditBlende->setText( "" );
 
