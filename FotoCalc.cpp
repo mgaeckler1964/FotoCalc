@@ -42,7 +42,7 @@
 #include <gak/fmtNumber.h>
 
 #include <WINLIB/WINAPP.H>
-#include <WINLIB/DEVICE.H>
+#include <WINLIB/colors.h>
 
 #include "FotoCalc_rc.h"
 #include "foto.gui.h"
