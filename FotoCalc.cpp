@@ -133,10 +133,10 @@ public:
 
 class FotoCalcApplication : public GuiApplication
 {
-	virtual bool 	startApplication( HINSTANCE /*hInstance*/, const char * /*cmdLine*/ )
+	virtual bool startApplication( HINSTANCE /*hInstance*/, const char * /*cmdLine*/ )
 	{
 		setApplication("Foto");
-		setComapny("gak");
+		setCompany("gak");
 
 		STRING	language = GetProfile( "", "language", "" );
 		setCountry( language );
@@ -144,17 +144,15 @@ class FotoCalcApplication : public GuiApplication
 	}
 	virtual CallbackWindow  *createMainWindow( const char * /*cmdLine*/, int /*nCmdShow*/ )
 	{
-		FotoMainWindow	*mainWindow = new FotoMainWindow;
+		std::auto_ptr<FotoMainWindow>	mainWindow( new FotoMainWindow );
 		if( mainWindow->create( NULL ) == scERROR )
 		{
-			MessageBox( NULL, "Could not create window", "Error", MB_ICONERROR );
-			delete mainWindow;
-			mainWindow = NULL;
+			throw gak::LibraryException( "Could not create window!" );
 		}
 		mainWindow->focus();
 		mainWindow->EditObjektGroesse->focus();
 
-		return mainWindow;
+		return mainWindow.release();
 	}
 	virtual void deleteMainWindow( BasicWindow  *mainWindow )
 	{
