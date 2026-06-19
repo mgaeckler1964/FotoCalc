@@ -40,6 +40,7 @@
 
 #include <gak/logfile.h>
 #include <gak/fmtNumber.h>
+#include <gak/intl.h>
 
 #include <WINLIB/WINAPP.H>
 #include <WINLIB/colors.h>
@@ -72,6 +73,16 @@ using namespace winlibGUI;
 // --------------------------------------------------------------------- //
 // ----- macros -------------------------------------------------------- //
 // --------------------------------------------------------------------- //
+
+inline const char *fmtFloat(double flt)
+{
+	return gak::formatFloat(flt, 0, 2, 0, gak::getDecimalSeparator());
+}
+
+inline const char *fmtFloat3(double flt)
+{
+	return gak::formatFloat(flt, 0, 3, 0, gak::getDecimalSeparator());
+}
 
 double inline rechneVergroesserungAusBild( double objektGroesse, double pictureSize )
 {
@@ -110,11 +121,11 @@ class FotoMainWindow : public FotoFORM_form
 	} autoRechne;
 	bool autoBildGroesse;
 
-	void rechneVergFaktor( void );
-	void rechneBildgroesse( void );
-	void rechneDistanz( void );
-	void rechneBildwinkel( void );
-	void rechneSchaerfentiefe( void );
+	void rechneVergFaktor();
+	void rechneBildgroesse();
+	void rechneDistanz();
+	void rechneBildwinkel();
+	void rechneSchaerfentiefe();
 
 	void EditGroesseChange(EditControl *Sender);
 	void EditDistanzChange(EditControl *Sender);
@@ -122,7 +133,7 @@ class FotoMainWindow : public FotoFORM_form
 	void EditVergrFaktorChange(EditControl *Sender);
 	void EditBlendeChange(EditControl *Sender);
 
-	virtual ProcessStatus handleCreate( void );
+	virtual ProcessStatus handleCreate();
 	virtual ProcessStatus handleCommand( int cmd );
 	virtual ProcessStatus handleEditChange( int control );
 	virtual ProcessStatus handleButtonClick( int control );
@@ -204,15 +215,15 @@ static FotoCalcApplication	fotoApplication;
 // --------------------------------------------------------------------- //
 
 //---------------------------------------------------------------------------
-void FotoMainWindow::rechneVergFaktor( void )
+void FotoMainWindow::rechneVergFaktor()
 {
 	bool	rechneBildgroesse = true;
 
 	double	vergrFaktor = 0.0;
-	double	distanz = EditDistanz->getText().getValueN<double>() * 1000.0;
-	double	brennweite = EditBrennweite->getText().getValueN<double>();
-	double	objektGroesse = EditObjektGroesse->getText().getValueN<double>();
-	double	bildGroesse = EditBildGroesse->getText().getValueN<double>();
+	double	distanz = EditDistanz->getText().getFloatN<double>(gak::getDecimalSeparator()) * 1000.0;
+	double	brennweite = EditBrennweite->getText().getFloatN<double>(10,gak::getDecimalSeparator());
+	double	objektGroesse = EditObjektGroesse->getText().getFloatN<double>(gak::getDecimalSeparator());
+	double	bildGroesse = EditBildGroesse->getText().getFloatN<double>(gak::getDecimalSeparator());
 
 	if( distanz>0 && brennweite>0 )
 		vergrFaktor = rechneVergroesserungAusObjektiv( brennweite, distanz );
@@ -226,7 +237,7 @@ void FotoMainWindow::rechneVergFaktor( void )
 	{
 		EditVergrFaktor->setBackgroundColorByRef( colors::PALE_GREEN );
 		EditVergrFaktor->setTag(1);
-		EditVergrFaktor->setText( gak::formatFloat(vergrFaktor, 0, 2) );
+		EditVergrFaktor->setText( fmtFloat(vergrFaktor) );
 		EditVergrFaktor->setTag(0);
 		if( rechneBildgroesse )
 			this->rechneBildgroesse();
@@ -236,12 +247,12 @@ void FotoMainWindow::rechneVergFaktor( void )
 
 }
 
-void FotoMainWindow::rechneBildgroesse( void )
+void FotoMainWindow::rechneBildgroesse()
 {
 	STRING	buffer;
 	double	pictureSize = 0;
-	double	vergrFaktor = EditVergrFaktor->getText().getValueN<double>();
-	double	objektGroesse = EditObjektGroesse->getText().getValueN<double>();
+	double	vergrFaktor = EditVergrFaktor->getText().getFloatN<double>(gak::getDecimalSeparator());
+	double	objektGroesse = EditObjektGroesse->getText().getFloatN<double>(gak::getDecimalSeparator());
 
 	if( vergrFaktor > 0 && objektGroesse > 0 )
 		pictureSize = objektGroesse / vergrFaktor;
@@ -249,7 +260,7 @@ void FotoMainWindow::rechneBildgroesse( void )
 	if( pictureSize > 0.005 )
 	{
 		EditVergrFaktor->setTag(1);
-		EditVergrFaktor->setText( gak::formatFloat(pictureSize, 0, 2) );
+		EditVergrFaktor->setText( fmtFloat(pictureSize) );
 		EditVergrFaktor->setTag(0);
 	}
 
@@ -263,17 +274,17 @@ void FotoMainWindow::rechneBildgroesse( void )
 	}
 }
 
-void FotoMainWindow::rechneDistanz( void )
+void FotoMainWindow::rechneDistanz()
 {
 	STRING	buffer;
 
-	double brennweite=EditBrennweite->getText().getValueN<double>();
-	double vergrFaktor=EditVergrFaktor->getText().getValueN<double>();
+	double brennweite=EditBrennweite->getText().getFloatN<double>(gak::getDecimalSeparator());
+	double vergrFaktor=EditVergrFaktor->getText().getFloatN<double>(gak::getDecimalSeparator());
 
 	if( brennweite > 0 && vergrFaktor > 0 )
 	{
 		double distanz=(vergrFaktor+1)*brennweite + (vergrFaktor+1)/vergrFaktor*brennweite;
-		buffer = gak::formatFloat(distanz/1000, 0, 3);
+		buffer = fmtFloat3(distanz/1000);
 	}
 
 	if( !buffer.isEmpty() )
@@ -285,26 +296,26 @@ void FotoMainWindow::rechneDistanz( void )
 	}
 }
 
-void FotoMainWindow::rechneBildwinkel( void )
+void FotoMainWindow::rechneBildwinkel()
 {
-	double	bildGroesse = EditBildGroesse->getText().getValueN<double>();
-	double	brennweite = EditBrennweite->getText().getValueN<double>();
+	double	bildGroesse = EditBildGroesse->getText().getFloatN<double>(gak::getDecimalSeparator());
+	double	brennweite = EditBrennweite->getText().getFloatN<double>(gak::getDecimalSeparator());
 	double	bildwinkel;
 
 	if( bildGroesse > 0 && brennweite > 0 )
 	{
 		bildwinkel = 360 * atan( bildGroesse / (2*brennweite) ) / M_PI;
 		EditBildwinkel->setBackgroundColorByRef( colors::PALE_GREEN );
-		EditBildwinkel->setText( gak::formatFloat(bildwinkel, 0, 2) );
+		EditBildwinkel->setText( fmtFloat(bildwinkel) );
 	}
 }
 
-void FotoMainWindow::rechneSchaerfentiefe( void )
+void FotoMainWindow::rechneSchaerfentiefe()
 {
-	double	bildGroesse = EditBildGroesse->getText().getValueN<double>();
-	double	brennweite = EditBrennweite->getText().getValueN<double>();
-	double	blende = EditBlende->getText().getValueN<double>();
-	double	distanz = EditDistanz->getText().getValueN<double>() * 1000.0;
+	double	bildGroesse = EditBildGroesse->getText().getFloatN<double>(gak::getDecimalSeparator());
+	double	brennweite = EditBrennweite->getText().getFloatN<double>(gak::getDecimalSeparator());
+	double	blende = EditBlende->getText().getFloatN<double>(gak::getDecimalSeparator());
+	double	distanz = EditDistanz->getText().getFloatN<double>(gak::getDecimalSeparator()) * 1000.0;
 
 	if( bildGroesse > 0 && brennweite > 0 && blende > 0 )
 	{
@@ -312,20 +323,20 @@ void FotoMainWindow::rechneSchaerfentiefe( void )
 		double hyperfokaleEntfernung = brennweite*brennweite / (blende*zerstreuungskreis) + brennweite;
 
 		EditHyperfokaleDistanz->setBackgroundColorByRef( colors::PALE_GREEN );
-		EditHyperfokaleDistanz->setText( gak::formatFloat(hyperfokaleEntfernung/1000,0,3) );
+		EditHyperfokaleDistanz->setText( fmtFloat3(hyperfokaleEntfernung/1000) );
 
 		if( distanz > 0 )
 		{
 			double minDistanz = distanz*hyperfokaleEntfernung / (hyperfokaleEntfernung+distanz-brennweite);
 			EditMinDistanz->setBackgroundColorByRef( colors::PALE_GREEN );
-			EditMinDistanz->setText( gak::formatFloat(minDistanz/1000,0,3) );
+			EditMinDistanz->setText( fmtFloat3(minDistanz/1000) );
 
 			double quotient = hyperfokaleEntfernung-distanz+brennweite;
 			if( quotient > 0 )
 			{
 				double maxDistanz = distanz*hyperfokaleEntfernung / quotient;
 				EditMaxDistanz->setFont( m_font );	// restore
-				EditMaxDistanz->setText( gak::formatFloat(maxDistanz/1000,0,3) );
+				EditMaxDistanz->setText( fmtFloat3(maxDistanz) );
 			}
 			else
 			{
@@ -355,14 +366,14 @@ void FotoMainWindow::EditGroesseChange(EditControl *Sender)
 			STRING	buffer;
 
 			double	vergrFaktor = 0.0;
-			double	objektGroesse = EditObjektGroesse->getText().getValueN<double>();
-			double	bildGroesse = EditBildGroesse->getText().getValueN<double>();
+			double	objektGroesse = EditObjektGroesse->getText().getFloatN<double>(gak::getDecimalSeparator());
+			double	bildGroesse = EditBildGroesse->getText().getFloatN<double>(gak::getDecimalSeparator());
 
 			if( objektGroesse > 0 && bildGroesse > 0 )
 				vergrFaktor = rechneVergroesserungAusBild( objektGroesse, bildGroesse );
 
 			if( vergrFaktor > 0.005 )
-				buffer = gak::formatFloat(vergrFaktor, 0, 2);
+				buffer = fmtFloat(vergrFaktor);
 
 			if( !buffer.isEmpty() )
 			{
@@ -453,7 +464,7 @@ void FotoMainWindow::EditBlendeChange(EditControl *)
 // ----- class virtuals ------------------------------------------------ //
 // --------------------------------------------------------------------- //
    
-ProcessStatus FotoMainWindow::handleCreate( void )
+ProcessStatus FotoMainWindow::handleCreate()
 {
 	PopupMenu *popup = appObject->loadMenuNew<PopupMenu>(SizeMenu_id);
 	EditBildGroesse->setPopupMenu(popup);
@@ -472,77 +483,76 @@ ProcessStatus FotoMainWindow::handleCommand( int menuId )
 		EditBildGroesse->setText("24");
 		break;
 	case SpDiagonal4327mm_id:
-		EditBildGroesse->setText("43.27");
+		EditBildGroesse->setText(fmtFloat(43.27));
 		break;
-
 	case ApsWidth236mm_id:
-		EditBildGroesse->setText("23.6");
+		EditBildGroesse->setText(fmtFloat(23.6));
 		break;
 	case ApsHeight158mm_id:
-		EditBildGroesse->setText("15.8");
+		EditBildGroesse->setText(fmtFloat(15.8));
 		break;
 	case ApsDiagonal284mm_id:
-		EditBildGroesse->setText("28.4");
+		EditBildGroesse->setText(fmtFloat(28.4));
 		break;
 
 	case MicroFourThirdsWidth1731mm_id:
-		EditBildGroesse->setText("17,31");
+		EditBildGroesse->setText(fmtFloat(17.31));
 		break;
 	case MicroFourThirdsHeight1998mm_id:
-		EditBildGroesse->setText("19.98");
+		EditBildGroesse->setText(fmtFloat(19.98));
 		break;
 	case MicroFourThirdsDiagonal2163mm_id:
-		EditBildGroesse->setText("21.63");
+		EditBildGroesse->setText(fmtFloat(21.63));
 		break;
 
 	case Nikon1width132mm_id:
-		EditBildGroesse->setText("13.2");
+		EditBildGroesse->setText(fmtFloat(13.2));
 		break;
 	case Nikon1Height88mm_id:
-		EditBildGroesse->setText("8.8");
+		EditBildGroesse->setText(fmtFloat(8.8));
 		break;
 	case  Nikon1Diagonal1586mm_id:
-		EditBildGroesse->setText("15.86");
+		EditBildGroesse->setText(fmtFloat(15.86));
 		break;
 
 	case SamsungWidth816mm_id:
-		EditBildGroesse->setText("8.16");
+		EditBildGroesse->setText(fmtFloat(8.16));
 		break;
 	case SamsungHeight612mm_id:
-		EditBildGroesse->setText("6.12");
+		EditBildGroesse->setText(fmtFloat(6.12));
 		break;
 	case SamsungDiagonal1012mm_id:
-		EditBildGroesse->setText("10.12");
+		EditBildGroesse->setText(fmtFloat(10.12));
 		break;
 
 	case Width616mm_id:
-		EditBildGroesse->setText("6.16");
+		EditBildGroesse->setText(fmtFloat(6.16));
 		break;
 	case Width718mm_id:
-		EditBildGroesse->setText("7.18");
+		EditBildGroesse->setText(fmtFloat(7.18));
 		break;
 	case Width76mm_id:
-		EditBildGroesse->setText("7.6");
+		EditBildGroesse->setText(fmtFloat(7.6));
 		break;
 
 	case Height462mm_id:
-		EditBildGroesse->setText("4.62");
+		EditBildGroesse->setText(fmtFloat(4.62));
 		break;
 	case Height532mm_id:
-		EditBildGroesse->setText("5.32");
+		EditBildGroesse->setText(fmtFloat(5.32));
 		break;
 	case Height57mm_id:
-		EditBildGroesse->setText("5.7");
+		EditBildGroesse->setText(fmtFloat(5.7));
 		break;
 
 	case Diagonal77mm_id:
-		EditBildGroesse->setText("7.7");
+		EditBildGroesse->setText(fmtFloat(7.7));
 		break;
 	case Diagonal893mm_id:
-		EditBildGroesse->setText("8.93");
+		EditBildGroesse->setText(fmtFloat(8.93));
 		break;
 	case Diagonal95mm_id:
-		EditBildGroesse->setText("9.5");
+		EditBildGroesse->setText(fmtFloat(9.5));
 		break;
 
 

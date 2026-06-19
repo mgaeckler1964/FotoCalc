@@ -10,7 +10,7 @@
 <child type="EditControl" name="EditObjektGroesse" caption="" x="165" y="15" width="80" height="25" style="1350631808" id="154">
 <layout x="1" y="0" width="1" height="1" growWidth="10" paddingLeft="2" paddingRight="2" paddingTop="2" paddingBottom="2" />
 </child>
-<child type="Label" name="LabelDistanz" caption="Distanz" x="265" y="39" width="80" height="25" style="1342242827" id="155">
+<child type="Label" name="LabelDistanz" caption="Distanz [m]" x="265" y="39" width="80" height="25" style="1342242827" id="155">
 <layout x="2" y="0" width="1" height="1" paddingLeft="2" paddingRight="2" paddingTop="2" paddingBottom="2" />
 </child>
 <child type="EditControl" name="EditDistanz" caption="" x="304" y="16" width="80" height="24" style="1350631808" id="156">
@@ -25,7 +25,7 @@
 <child type="EditControl" name="EditBildGroesse" caption="" x="116" y="29" width="80" height="25" style="1350631808" id="158">
 <layout x="1" y="1" growWidth="10" paddingLeft="2" paddingRight="2" paddingTop="2" paddingBottom="2" />
 </child>
-<child type="Label" name="" caption="Brennweite" x="310" y="34" width="0" height="0" style="1342242827">
+<child type="Label" name="" caption="Brennweite [mm]" x="310" y="34" width="0" height="0" style="1342242827">
 <layout x="2" y="1" paddingLeft="2" paddingRight="2" paddingTop="2" paddingBottom="2" />
 </child>
 <child type="EditControl" name="EditBrennweite" caption="" x="388" y="30" width="80" height="25" style="1350631808" id="159">
@@ -58,13 +58,13 @@
 <child type="EditControl" name="EditBlende" caption="" x="384" y="96" width="80" height="25" style="1350631808" id="165">
 <layout x="3" y="3" growWidth="10" paddingLeft="2" paddingRight="2" paddingTop="2" paddingBottom="2" />
 </child>
-<child type="Label" name="" caption="Min. Entf." x="35" y="211" width="0" height="0" style="1342242827">
+<child type="Label" name="" caption="Min. Entf. [m]" x="35" y="211" width="0" height="0" style="1342242827">
 <layout x="0" y="4" paddingLeft="2" paddingRight="2" paddingTop="2" paddingBottom="2" />
 </child>
 <child type="EditControl" name="EditMinDistanz" caption="" x="160" y="152" width="80" height="25" style="1350631808" id="166">
 <layout x="1" y="4" growWidth="10" paddingLeft="2" paddingRight="2" paddingTop="2" paddingBottom="2" />
 </child>
-<child type="Label" name="" caption="Max. Entf." x="296" y="128" width="80" height="25" style="1342242827">
+<child type="Label" name="" caption="Max. Entf. [m]" x="296" y="128" width="80" height="25" style="1342242827">
 <layout x="2" y="4" paddingLeft="2" paddingRight="2" paddingTop="2" paddingBottom="2" />
 </child>
 <child type="EditControl" name="EditMaxDistanz" caption="" x="408" y="136" width="80" height="25" style="1350631808" id="167">

@@ -17,9 +17,9 @@
 <item caption="Diagonal (7.7mm)" translation="Diagonale (7,7mm)" />
 <item caption="Diagonal (8.93mm)" translation="Diagonale (8,93mm)" />
 <item caption="Diagonal (9.5mm)" translation="Diagonale (9,5mm)" />
-<item caption="Distance [m]" translation="Distanz" />
+<item caption="Distance [m]" translation="Distanz [m]" />
 <item caption="Factor" translation="Vergrfaktor" />
-<item caption="FocalLength [mm]" translation="Brennweite" />
+<item caption="FocalLength [mm]" translation="Brennweite [mm]" />
 <item caption="Foto Calculator" translation="Fotorechner" />
 <item caption="Height (15.8mm)" translation="Höhe (15,8mm)" />
 <item caption="Height (19.98mm)" translation="Höhe (19,98mm)" />
@@ -30,8 +30,8 @@
 <item caption="Height (6.12mm)" translation="Höhe (6,12mm)" />
 <item caption="Height (8.8mm)" translation="Höhe (8,8mm)" />
 <item caption="Hyp. dist. [m]" translation="Hyp. Entf [m]" />
-<item caption="Max. Dist [m]" translation="Max. Entf." />
-<item caption="Min. Dist. [m]" translation="Min. Entf." />
+<item caption="Max. Dist [m]" translation="Max. Entf. [m]" />
+<item caption="Min. Dist. [m]" translation="Min. Entf. [m]" />
 <item caption="Object Size [mm]:" translation="Objektgröße [mm]" />
 <item caption="Picture Angel" translation="Bildwinkel" />
 <item caption="Picture Size [mm]" translation="Bildgröße [mm]" />

@@ -11,6 +11,7 @@
 #include <winlib/scrollFrame.h>
 #include <winlib/ControlW.h>
 #include <winlib/xmlEditorChild.h>
+#include <winlib/chartWin.h>
 #include <winlib/gridView.h>
 
 #include <winlib/winApp.h>
@@ -62,7 +63,7 @@ namespace winlibGUI {
 
 	class GuiApplication : public winlib::Application {
 		public:
-		virtual gak::xml::Document *getGuiDoc( void );
+		virtual gak::xml::Document *getGuiDoc();
 		GuiApplication(int iconID=-1) : winlib::Application(iconID) {}
 	};
 
