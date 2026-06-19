@@ -103,6 +103,8 @@ double inline rechneVergroesserungAusObjektiv( double brennweite, double distanz
 
 class FotoMainWindow : public FotoFORM_form
 {
+	Font	m_font;
+
 	enum AUTO_RECHNE {
 		AUTO_NIX, AUTO_FAKTOR, AUTO_DISTANZ
 	} autoRechne;
@@ -205,13 +207,12 @@ static FotoCalcApplication	fotoApplication;
 void FotoMainWindow::rechneVergFaktor( void )
 {
 	bool	rechneBildgroesse = true;
-	char	buffer[128];
 
 	double	vergrFaktor = 0.0;
-	double	distanz = atof( EditDistanz->getText() ) * 1000.0;
-	double	brennweite = atof( EditBrennweite->getText() );
-	double	objektGroesse = atof( EditObjektGroesse->getText() );
-	double	bildGroesse = atof( EditBildGroesse->getText() );
+	double	distanz = EditDistanz->getText().getValueN<double>() * 1000.0;
+	double	brennweite = EditBrennweite->getText().getValueN<double>();
+	double	objektGroesse = EditObjektGroesse->getText().getValueN<double>();
+	double	bildGroesse = EditBildGroesse->getText().getValueN<double>();
 
 	if( distanz>0 && brennweite>0 )
 		vergrFaktor = rechneVergroesserungAusObjektiv( brennweite, distanz );
@@ -223,10 +224,9 @@ void FotoMainWindow::rechneVergFaktor( void )
 
 	if( vergrFaktor > 0.005 )
 	{
-		sprintf( buffer, "%.2f", vergrFaktor );
 		EditVergrFaktor->setBackgroundColorByRef( colors::PALE_GREEN );
 		EditVergrFaktor->setTag(1);
-		EditVergrFaktor->setText( buffer );
+		EditVergrFaktor->setText( gak::formatFloat(vergrFaktor, 0, 2) );
 		EditVergrFaktor->setTag(0);
 		if( rechneBildgroesse )
 			this->rechneBildgroesse();
@@ -238,19 +238,22 @@ void FotoMainWindow::rechneVergFaktor( void )
 
 void FotoMainWindow::rechneBildgroesse( void )
 {
-	char	buffer[128];
+	STRING	buffer;
 	double	pictureSize = 0;
-	double	vergrFaktor = atof( EditVergrFaktor->getText() );
-	double	objektGroesse = atof( EditObjektGroesse->getText() );
+	double	vergrFaktor = EditVergrFaktor->getText().getValueN<double>();
+	double	objektGroesse = EditObjektGroesse->getText().getValueN<double>();
 
-	*buffer = 0;
 	if( vergrFaktor > 0 && objektGroesse > 0 )
 		pictureSize = objektGroesse / vergrFaktor;
 
 	if( pictureSize > 0.005 )
-		sprintf( buffer, "%.2f", pictureSize );
+	{
+		EditVergrFaktor->setTag(1);
+		EditVergrFaktor->setText( gak::formatFloat(pictureSize, 0, 2) );
+		EditVergrFaktor->setTag(0);
+	}
 
-	if( *buffer )
+	if( !buffer.isEmpty() )
 	{
 		EditBildGroesse->setTag(1);
 		EditBildGroesse->setBackgroundColorByRef( colors::PALE_GREEN );
@@ -262,19 +265,18 @@ void FotoMainWindow::rechneBildgroesse( void )
 
 void FotoMainWindow::rechneDistanz( void )
 {
-	char	buffer[128];
+	STRING	buffer;
 
-	double brennweite=atof( EditBrennweite->getText() );
-	double vergrFaktor=atof( EditVergrFaktor->getText() );
-	*buffer = 0;
+	double brennweite=EditBrennweite->getText().getValueN<double>();
+	double vergrFaktor=EditVergrFaktor->getText().getValueN<double>();
 
 	if( brennweite > 0 && vergrFaktor > 0 )
 	{
 		double distanz=(vergrFaktor+1)*brennweite + (vergrFaktor+1)/vergrFaktor*brennweite;
-		sprintf( buffer, "%.3f", distanz/1000 );
+		buffer = gak::formatFloat(distanz/1000, 0, 3);
 	}
 
-	if( *buffer )
+	if( !buffer.isEmpty() )
 	{
 		EditDistanz->setTag(1);
 		EditDistanz->setBackgroundColorByRef( colors::PALE_GREEN );
@@ -285,55 +287,49 @@ void FotoMainWindow::rechneDistanz( void )
 
 void FotoMainWindow::rechneBildwinkel( void )
 {
-	char	buffer[128];
-	double	bildGroesse = atof( EditBildGroesse->getText() );
-	double	brennweite = atof( EditBrennweite->getText() );
+	double	bildGroesse = EditBildGroesse->getText().getValueN<double>();
+	double	brennweite = EditBrennweite->getText().getValueN<double>();
 	double	bildwinkel;
 
 	if( bildGroesse > 0 && brennweite > 0 )
 	{
 		bildwinkel = 360 * atan( bildGroesse / (2*brennweite) ) / M_PI;
-		sprintf( buffer, "%.2f", bildwinkel );
 		EditBildwinkel->setBackgroundColorByRef( colors::PALE_GREEN );
-		EditBildwinkel->setText( buffer );
+		EditBildwinkel->setText( gak::formatFloat(bildwinkel, 0, 2) );
 	}
 }
 
 void FotoMainWindow::rechneSchaerfentiefe( void )
 {
-	char	buffer[128];
-	double	bildGroesse = atof( EditBildGroesse->getText() );
-	double	brennweite = atof( EditBrennweite->getText() );
-	double	blende = atof( EditBlende->getText() );
-	double	distanz = atof( EditDistanz->getText() ) * 1000.0;
+	double	bildGroesse = EditBildGroesse->getText().getValueN<double>();
+	double	brennweite = EditBrennweite->getText().getValueN<double>();
+	double	blende = EditBlende->getText().getValueN<double>();
+	double	distanz = EditDistanz->getText().getValueN<double>() * 1000.0;
 
 	if( bildGroesse > 0 && brennweite > 0 && blende > 0 )
 	{
 		double zerstreuungskreis = bildGroesse/1500;
 		double hyperfokaleEntfernung = brennweite*brennweite / (blende*zerstreuungskreis) + brennweite;
 
-		sprintf( buffer, "%.3f", hyperfokaleEntfernung/1000 );
 		EditHyperfokaleDistanz->setBackgroundColorByRef( colors::PALE_GREEN );
-		EditHyperfokaleDistanz->setText( buffer );
+		EditHyperfokaleDistanz->setText( gak::formatFloat(hyperfokaleEntfernung/1000,0,3) );
 
 		if( distanz > 0 )
 		{
 			double minDistanz = distanz*hyperfokaleEntfernung / (hyperfokaleEntfernung+distanz-brennweite);
-			sprintf( buffer, "%.3f", minDistanz/1000 );
 			EditMinDistanz->setBackgroundColorByRef( colors::PALE_GREEN );
-			EditMinDistanz->setText( buffer );
+			EditMinDistanz->setText( gak::formatFloat(minDistanz/1000,0,3) );
 
 			double quotient = hyperfokaleEntfernung-distanz+brennweite;
 			if( quotient > 0 )
 			{
 				double maxDistanz = distanz*hyperfokaleEntfernung / quotient;
-				sprintf( buffer, "%.3f", maxDistanz/1000.0 );
-//				EditMaxDistanz->Font->Name = "MS Sans Serif";
-				EditMaxDistanz->setText( buffer );
+				EditMaxDistanz->setFont( m_font );	// restore
+				EditMaxDistanz->setText( gak::formatFloat(maxDistanz/1000,0,3) );
 			}
 			else
 			{
-//				EditMaxDistanz->Font->Name = "Symbol";
+				EditMaxDistanz->getFont().setFontName("Symbol");
 				EditMaxDistanz->setText( "\xA5" );
 			}
 
@@ -356,20 +352,19 @@ void FotoMainWindow::EditGroesseChange(EditControl *Sender)
 			rechneBildgroesse();
 		else
 		{
-			char	buffer[128];
+			STRING	buffer;
 
 			double	vergrFaktor = 0.0;
-			double	objektGroesse = atof( EditObjektGroesse->getText() );
-			double	bildGroesse = atof( EditBildGroesse->getText() );
+			double	objektGroesse = EditObjektGroesse->getText().getValueN<double>();
+			double	bildGroesse = EditBildGroesse->getText().getValueN<double>();
 
-			*buffer = 0;
 			if( objektGroesse > 0 && bildGroesse > 0 )
 				vergrFaktor = rechneVergroesserungAusBild( objektGroesse, bildGroesse );
 
 			if( vergrFaktor > 0.005 )
-				sprintf( buffer, "%.2f", vergrFaktor );
+				buffer = gak::formatFloat(vergrFaktor, 0, 2);
 
-			if( *buffer )
+			if( !buffer.isEmpty() )
 			{
 				EditVergrFaktor->setTag(1);
 				EditVergrFaktor->setBackgroundColorByRef( colors::PALE_GREEN );
@@ -462,6 +457,7 @@ ProcessStatus FotoMainWindow::handleCreate( void )
 {
 	PopupMenu *popup = appObject->loadMenuNew<PopupMenu>(SizeMenu_id);
 	EditBildGroesse->setPopupMenu(popup);
+	m_font = EditMaxDistanz->getFont();
 	return psDO_DEFAULT;
 }
 
