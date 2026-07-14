@@ -157,8 +157,8 @@ class FotoCalcApplication : public GuiApplication
 	}
 	virtual CallbackWindow  *createMainWindow( const char * /*cmdLine*/, int /*nCmdShow*/ )
 	{
-		std::auto_ptr<FotoMainWindow>	mainWindow( new FotoMainWindow );
-		if( mainWindow->create( NULL ) == scERROR )
+		std::unique_ptr<FotoMainWindow>	mainWindow( new FotoMainWindow );
+		if( mainWindow->create( nullptr ) == scERROR )
 		{
 			throw gak::LibraryException( "Could not create window!" );
 		}
