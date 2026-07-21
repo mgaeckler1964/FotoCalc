@@ -67,11 +67,11 @@ namespace winlibGUI {
 		GuiApplication(int iconID=-1) : winlib::Application(iconID) {}
 	};
 
-	class FotoFORM_form : public winlib::PopupWindow {
+	class FotoFORM_form : public winlib::OverlappedWindow {
 		public:
-		FotoFORM_form(winlib::BasicWindow *owner) : PopupWindow(owner) {}
+		FotoFORM_form(winlib::BasicWindow *owner) : OverlappedWindow(owner) {}
 		winlib::SuccessCode create(winlib::BasicWindow*parent) {
-			return PopupWindow::create(parent,"FotoFORM");
+			return OverlappedWindow::create(parent,"FotoFORM");
 		}
 
 		winlib::EditControl *EditObjektGroesse;
