@@ -2,7 +2,7 @@
 <?xml version="1.0" encoding="iso-8859-1" ?>
 <gui>
 <forms>
-<form name="FotoFORM" style="281673728" width="590" height="254" caption="Fotorechner" id="128" baseClass="OverlappedWindow" bgColor="COLOR_BTNFACE" bg_red="0" bg_green="0" bg_blue="0">
+<form name="FotoFORM" style="281673728" width="590" height="214" caption="Fotorechner" id="128" baseClass="OverlappedWindow" bgColor="COLOR_BTNFACE" bg_red="0" bg_green="0" bg_blue="0">
 <layoutManager type="TableManager" marginLeft="5" marginRight="5" marginTop="5" marginBottom="5" />
 <child type="Label" name="" caption="Objektgröße [mm]" x="27" y="37" width="0" height="0" style="1342242827">
 <layout x="0" y="0" width="1" height="1" growWidth="0" growHeight="0" paddingLeft="2" paddingRight="2" paddingTop="2" paddingBottom="2" />
