@@ -29,7 +29,7 @@
 		SUCH DAMAGE.
 */
 
-package com.gak.FotoCalc.android;
+package at.gaeckler.FotoCalc.android;
 
 import android.app.Activity;
 import android.os.Build;
@@ -41,7 +41,7 @@ import android.widget.EditText;
 import android.app.AlertDialog;
 import android.content.*;
 
-import com.gak.FotoCalc.FotoCalculator;
+import at.gaeckler.FotoCalc.FotoCalculator;
 
 public class FotoCalcActivity extends Activity
 {
