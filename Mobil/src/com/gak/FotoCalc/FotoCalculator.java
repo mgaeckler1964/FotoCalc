@@ -2,11 +2,11 @@
 		Project:		FotoCalc
 		Module:			FotoCalculator.java
 		Description:	the calculations
-		Author:			Martin Gäckler
+		Author:			Martin GÃ¤ckler
 		Address:		Hofmannsthalweg 14, A-4030 Linz
 		Web:			https://www.gaeckler.at/
 
-		Copyright:		(c) 1988-2024 Martin Gäckler
+		Copyright:		(c) 1988-2024 Martin GÃ¤ckler
 
 		This program is free software: you can redistribute it and/or modify  
 		it under the terms of the GNU General Public License as published by  
@@ -15,7 +15,7 @@
 		You should have received a copy of the GNU General Public License 
 		along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-		THIS SOFTWARE IS PROVIDED BY Martin Gäckler, Austria, Linz ``AS IS''
+		THIS SOFTWARE IS PROVIDED BY Martin GÃ¤ckler, Austria, Linz ``AS IS''
 		AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
 		TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
 		PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR
@@ -97,7 +97,7 @@ public class FotoCalculator
 
 		if( bildGroesse > 0 && brennweite > 0 && blende > 0 && distanz > 0 )
 		{
-			resultString = "Schärfentiefe von ";
+			resultString = "Schï¿½rfentiefe von ";
 			double zerstreuungskreis = bildGroesse/1500;
 			double hyperfokaleEntfernung = brennweite*brennweite / (blende*zerstreuungskreis) + brennweite;
 
@@ -148,7 +148,7 @@ public class FotoCalculator
 		}
 		if( vergrFaktor > 0.005 )
 		{
-			resultString = "Vergrößerungsfaktor von ";
+			resultString = "Vergrï¿½ï¿½erungsfaktor von ";
 			resultString += String.valueOf( Math.ceil( vergrFaktor * 10 )/10 );
 			if( bildBreite > 0 )
 			{
@@ -158,13 +158,13 @@ public class FotoCalculator
 			}
 			if( bildHoehe > 0 )
 			{
-				resultString += "\nHöhe: ";
+				resultString += "\nHï¿½he: ";
 				resultString += String.valueOf( Math.ceil( bildHoehe * vergrFaktor * 10 )/10 );
 				resultString += "mm";
 			}
 		}
 		else if( vergrFaktor < 0 )
-			resultString = "Vergrößerungsfaktor kann nicht berechnet werden.";
+			resultString = "Vergrï¿½ï¿½erungsfaktor kann nicht berechnet werden.";
 
 		return resultString;
 	}

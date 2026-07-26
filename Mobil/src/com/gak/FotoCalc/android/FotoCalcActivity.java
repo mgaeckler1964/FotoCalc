@@ -2,11 +2,11 @@
 		Project:		FotoCalc
 		Module:			FotoCalcActivity.java
 		Description:	the android main activitiy for the calculator
-		Author:			Martin Gäckler
+		Author:			Martin GÃ¤ckler
 		Address:		Hofmannsthalweg 14, A-4030 Linz
 		Web:			https://www.gaeckler.at/
 
-		Copyright:		(c) 1988-2024 Martin Gäckler
+		Copyright:		(c) 1988-2024 Martin GÃ¤ckler
 
 		This program is free software: you can redistribute it and/or modify  
 		it under the terms of the GNU General Public License as published by  
@@ -15,7 +15,7 @@
 		You should have received a copy of the GNU General Public License 
 		along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-		THIS SOFTWARE IS PROVIDED BY Martin Gäckler, Austria, Linz ``AS IS''
+		THIS SOFTWARE IS PROVIDED BY Martin GÃ¤ckler, Austria, Linz ``AS IS''
 		AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
 		TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
 		PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR
@@ -41,7 +41,6 @@ import android.widget.EditText;
 import android.app.AlertDialog;
 import android.content.*;
 
-import com.gak.FotoCalc.android.R;
 import com.gak.FotoCalc.FotoCalculator;
 
 public class FotoCalcActivity extends Activity
@@ -102,71 +101,69 @@ public class FotoCalcActivity extends Activity
     {
     	int	itemId = item.getItemId();
     	//System.out.println( itemId );
-    	switch( itemId )
-    	{
-    	case R.id.exit:
-    		finish();
-    		break;
-    	case R.id.calcDOF:
-    		calcDOF();
-    		break;
-    	case R.id.calcAngle:
-    		calcAngle();
-    		break;
-    	case R.id.calcHyperDistance:
-    		calcHyperDistance();
-    		break;
-    	case R.id.calcSizeFactor:
-    		calcSizeFactor();
-    		break;
-    	case R.id.calcTime:
-    		calcTime();
-    		break;
-    	case R.id.SmallPicture:
-    		imageWidth.setText("36");
-    		imageHeight.setText("24");
-    		break;
-    	case R.id.apsNikon:
-    		imageWidth.setText("23.6");
-    		imageHeight.setText("15.8");
-    		break;
-    	case R.id.fourThirds:
-    		imageWidth.setText("17.31");
-    		imageHeight.setText("12.98");
-    		break;   
-    	case R.id.nikon1:
-    		imageWidth.setText("13.2");
-    		imageHeight.setText("8.8");
-    		break;
-    	case R.id.SamsungA55:
-    		imageWidth.setText("8.16");
-    		imageHeight.setText("6.12");
-    		break;
-    	case R.id.compact17:
-    		imageWidth.setText("7.6");
-    		imageHeight.setText("5.7");
-    		break;   
-    	case R.id.compact18:
-    		imageWidth.setText("7.18");
-    		imageHeight.setText("5.32");
-    		break;   
-    	case R.id.compact23:
-    		imageWidth.setText("6.16");
-    		imageHeight.setText("4.62");
-    		break;   
-    	case R.id.about:
-    		String name = getString(R.string.app_name);
-    		String version = getString(R.string.app_version);
-    		String copyinfo = getString(R.string.app_copyinfo);
-    		String url = getString(R.string.app_url);
-    		showResult( 
-    			name, 
-    			name + " " + version + "\n" +
-    			copyinfo + "\n" +
-    			url
-    		);
-    		break;
-    	case R.id.restart:
+		if( itemId == R.id.exit ) {
+			finish();
+		}
+		else if( itemId == R.id.calcDOF ) {
+			calcDOF();
+		}
+		else if( itemId == R.id.calcAngle ) {
+			calcAngle();
+		}
+		else if( itemId == R.id.calcHyperDistance ) {
+			calcHyperDistance();
+		}
+		else if( itemId == R.id.calcSizeFactor ) {
+			calcSizeFactor();
+		}
+		else if( itemId == R.id.calcTime ) {
+			calcTime();
+		}
+		else if( itemId == R.id.SmallPicture ) {
+			imageWidth.setText("36");
+			imageHeight.setText("24");
+		}
+		else if( itemId == R.id.apsNikon ) {
+			imageWidth.setText("23.6");
+			imageHeight.setText("15.8");
+		}
+    	else if( itemId == R.id.fourThirds ) {
+			imageWidth.setText("17.31");
+			imageHeight.setText("12.98");
+		}
+    	else if( itemId == R.id.nikon1 ) {
+			imageWidth.setText("13.2");
+			imageHeight.setText("8.8");
+		}
+    	else if( itemId == R.id.SamsungA55 ) {
+			imageWidth.setText("8.16");
+			imageHeight.setText("6.12");
+		}
+    	else if( itemId == R.id.compact17 ) {
+			imageWidth.setText("7.6");
+			imageHeight.setText("5.7");
+		}
+    	else if( itemId == R.id.compact18 ) {
+			imageWidth.setText("7.18");
+			imageHeight.setText("5.32");
+		}
+    	else if( itemId == R.id.compact23 ) {
+			imageWidth.setText("6.16");
+			imageHeight.setText("4.62");
+		}
+    	else if( itemId == R.id.about ) {
+			String name = getString(R.string.app_name);
+			String version = getString(R.string.app_version);
+			String copyinfo = getString(R.string.app_copyinfo);
+			String url = getString(R.string.app_url);
+			showResult(
+					name,
+					name + " " + version + "\n" +
+							copyinfo + "\n" +
+							url
+			);
+		}
+    	else if( itemId == R.id.restart ) {
             greyFilter.setText( "" );
             time.setText( "" );
             distance.setText( "" );
@@ -174,7 +171,6 @@ public class FotoCalcActivity extends Activity
             focalLength.setText( "" );
             imageHeight.setText( "" );
             imageWidth.setText( "" );
-            break;
     	}
 
     	return super.onOptionsItemSelected(item);
@@ -324,7 +320,7 @@ public class FotoCalcActivity extends Activity
 			catch (NumberFormatException e)
 			{
 				if( (optional & NEED_SIZE) == 0 )
-					error = "Höhe fehlt oder hat falsches Format";
+					error = "HÃ¶he fehlt oder hat falsches Format";
 			}
 			try
 			{
@@ -365,7 +361,7 @@ public class FotoCalcActivity extends Activity
 		{
 			resultString = FotoCalculator.calcDOF(m_picSize, m_focalLength, m_aperture, m_distance);
 		}
-		showResult( "Schärfentiefe", resultString );
+		showResult( "SchÃ¤rfentiefe", resultString );
 	}
 	private void calcHyperDistance()
 	{
@@ -388,7 +384,7 @@ public class FotoCalcActivity extends Activity
 			resultString = FotoCalculator.calcSizeFactor( m_distance, m_focalLength, m_width, m_height );
 		}
 
-		showResult( "Vergrößerungsfaktor", resultString );
+		showResult( "VergrÃ¶ÃŸerungsfaktor", resultString );
 	}
 	private void calcTime()
 	{
