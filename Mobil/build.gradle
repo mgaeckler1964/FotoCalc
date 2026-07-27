@@ -22,7 +22,7 @@ android {
         minSdk 18
         targetSdk 36
         versionCode 9
-        versionName "3.1.5"
+        versionName "3.7.27"
         resValue "string", "app_version", versionName
     }
 
@@ -37,5 +37,12 @@ android {
             res.srcDirs = ['res']
             assets.srcDirs = ['assets']
         }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    tasks.withType(JavaCompile) {
+        // options.compilerArgs << "-Xlint:deprecation"
     }
 }
