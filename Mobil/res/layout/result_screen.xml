@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
+  android:fitsSystemWindows="true"
   android:orientation="vertical"
   android:layout_width="fill_parent"
   android:layout_height="fill_parent">
-    <TextView android:text="@string/resultLabel" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_height="wrap_content" android:id="@+id/resultTitle"></TextView>
+    <TextView android:text="@string/resultLabel" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_height="wrap_content" android:id="@+id/resultTitle" />
     <TextView android:id="@+id/resultString" android:layout_width="wrap_content" android:layout_height="wrap_content" />
     <LinearLayout style="?android:attr/buttonBarButtonStyle" android:layout_width="fill_parent" android:id="@+id/linearLayout1" android:layout_height="wrap_content">
-        <Button android:id="@+id/buttonPrev" android:text="&lt;&lt;" style="?android:attr/buttonBarButtonStyle" android:layout_height="wrap_content" android:layout_width="wrap_content"></Button>
-        <Button android:id="@+id/buttonOK" android:text="@string/buttonOK" style="?android:attr/buttonBarButtonStyle" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
-        <Button android:id="@+id/buttonNext" android:text="&gt;&gt;" style="?android:attr/buttonBarButtonStyle" android:layout_height="wrap_content" android:layout_width="wrap_content"></Button>
+        <Button android:id="@+id/buttonPrev" android:text="&lt;&lt;" style="?android:attr/buttonBarButtonStyle" android:layout_height="wrap_content" android:layout_width="wrap_content" />
+        <Button android:id="@+id/buttonOK" android:text="@string/buttonOK" style="?android:attr/buttonBarButtonStyle" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        <Button android:id="@+id/buttonNext" android:text="&gt;&gt;" style="?android:attr/buttonBarButtonStyle" android:layout_height="wrap_content" android:layout_width="wrap_content" />
     </LinearLayout>
     
 </LinearLayout>

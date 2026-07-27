@@ -97,7 +97,7 @@ public class FotoCalculator
 
 		if( bildGroesse > 0 && brennweite > 0 && blende > 0 && distanz > 0 )
 		{
-			resultString = "Sch�rfentiefe von ";
+			resultString = "Schärfentiefe von ";
 			double zerstreuungskreis = bildGroesse/1500;
 			double hyperfokaleEntfernung = brennweite*brennweite / (blende*zerstreuungskreis) + brennweite;
 
