@@ -45,14 +45,14 @@ public class ResultScreen extends Activity {
 	Button	buttonPrev, buttonOK, buttonNext;
 	TextView resultString;
 
-	public static final int	zeiten[] =
+	public static final int[]	zeiten =
 	{
 		1, 2, 3, 4, 5, 6, 8, 10, 13, 15, 20, 25, 30, 40, 45, 50, 60, 80,
 		90, 100, 125, 160, 180, 200, 250, 320, 350, 400, 500, 640, 750,
 		800, 1000, 1250, 1500, 1600, 2000, 2500, 3000, 3200, 4000, 8000, -1
 	};
 
-	public static final double blendenReihe[] =
+	public static final double[] blendenReihe =
 	{
 		1, 1.4, 1.8, 2, 2.2, 2.4, 2.5, 2.8, 3.2, 3.3, 3.5, 4, 4.5, 4.8, 5, 5.6,
 		6.3, 6.7, 7.1, 8, 9, 9.5, 10, 11, 13, 14, 16, 18, 19, 20, 22, 32, -1
@@ -74,21 +74,21 @@ public class ResultScreen extends Activity {
 			if( neueZeit > 1.0/zeiten[i] )
 			{
 				if (i > 0)
-					resultString += "1/" + String.valueOf(zeiten[i - 1]) +
+					resultString += "1/" + zeiten[i - 1] +
 						" > ";
-				resultString += "1/" + String.valueOf(Math.ceil(10/neueZeit)/10);
+				resultString += "1/" + Math.ceil(10/neueZeit)/10;
 
 				if( zeiten[i] > 0 )
 					resultString += " > ";
 			}
 			if( zeiten[i] > 0 )
-				resultString += "1/" + String.valueOf( zeiten[i] );
+				resultString += "1/" + zeiten[i];
 		}
 		else
-			resultString += String.valueOf( Math.ceil( neueZeit * 10 ) / 10 ) + '"';
+			resultString += Math.ceil( neueZeit * 10 ) / 10 + '"';
 		
 		if( blende > 0 )
-			resultString += "\n" + String.valueOf(Math.ceil( blende * 10 ) / 10 );
+			resultString += "\n" + Math.ceil( blende * 10 ) / 10;
 		this.resultString.setText(resultString);
 	}
 
@@ -130,10 +130,10 @@ public class ResultScreen extends Activity {
         neueZeit = intent.getDoubleExtra("neueZeit", 0);
         blende = intent.getDoubleExtra("blende", -1);
 
-        buttonPrev = (Button)findViewById( R.id.buttonPrev );
-        buttonOK = (Button)findViewById( R.id.buttonOK );
-        buttonNext = (Button)findViewById( R.id.buttonNext );
-        resultString = (TextView)findViewById( R.id.resultString );
+        buttonPrev = findViewById( R.id.buttonPrev );
+        buttonOK = findViewById( R.id.buttonOK );
+        buttonNext = findViewById( R.id.buttonNext );
+        resultString = findViewById( R.id.resultString );
         
         buttonOK.setOnClickListener( new View.OnClickListener() {
 			
@@ -162,11 +162,5 @@ public class ResultScreen extends Activity {
         	buttonNext.setVisibility(View.GONE);
         }
         makeResultString();
-    }
-    @Override
-    public void onBackPressed()
-    {
-    	finish();
-    	super.onBackPressed();
     }
  }
