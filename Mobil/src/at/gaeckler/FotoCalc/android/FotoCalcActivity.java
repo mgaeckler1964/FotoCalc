@@ -65,42 +65,42 @@ public class FotoCalcActivity extends Activity
 	EditText	greyFilter, time, distance, aperture, focalLength, imageHeight, imageWidth;
 
 	/** Called when the activity is first created. */
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
-        
-        greyFilter = (EditText)findViewById( R.id.greyFilter );
-        time = (EditText)findViewById( R.id.time );
-        distance = (EditText)findViewById( R.id.distance );
-        aperture = (EditText)findViewById( R.id.aperture );
-        focalLength = (EditText)findViewById( R.id.focalLength );
-        imageHeight = (EditText)findViewById( R.id.imageHeight );
-        imageWidth = (EditText)findViewById( R.id.imageWidth );
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main);
 
-        SharedPreferences settings = getSharedPreferences(CONFIGURATION, 0);
-        greyFilter.setText( settings.getString("greyFilter", "") );
-        time.setText( settings.getString("time", "") );
-        distance.setText( settings.getString("distance", "") );
-        aperture.setText( settings.getString("aperture", "") );
-        focalLength.setText( settings.getString("focalLength", "") );
-        imageHeight.setText( settings.getString("imageHeight", "") );
-        imageWidth.setText( settings.getString("imageWidth", "") );
-    }
-    @Override
-    public boolean onCreateOptionsMenu( android.view.Menu menu )
-    {
-    	MenuInflater inflater = getMenuInflater();
-    	inflater.inflate(R.menu.fc_menu, menu);
-    	
-    	return super.onCreateOptionsMenu(menu);
-    }
-    
-    @Override
-    public boolean onOptionsItemSelected( MenuItem item )
-    {
-    	int	itemId = item.getItemId();
-    	//System.out.println( itemId );
+		greyFilter = findViewById( R.id.greyFilter );
+		time = findViewById( R.id.time );
+		distance = findViewById( R.id.distance );
+		aperture = findViewById( R.id.aperture );
+		focalLength = findViewById( R.id.focalLength );
+		imageHeight = findViewById( R.id.imageHeight );
+		imageWidth = findViewById( R.id.imageWidth );
+
+		SharedPreferences settings = getSharedPreferences(CONFIGURATION, 0);
+		greyFilter.setText( settings.getString("greyFilter", "") );
+		time.setText( settings.getString("time", "") );
+		distance.setText( settings.getString("distance", "") );
+		aperture.setText( settings.getString("aperture", "") );
+		focalLength.setText( settings.getString("focalLength", "") );
+		imageHeight.setText( settings.getString("imageHeight", "") );
+		imageWidth.setText( settings.getString("imageWidth", "") );
+	}
+	@Override
+	public boolean onCreateOptionsMenu( android.view.Menu menu )
+	{
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.fc_menu, menu);
+
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected( MenuItem item )
+	{
+		int	itemId = item.getItemId();
+		//System.out.println( itemId );
 		if( itemId == R.id.exit ) {
 			finish();
 		}
@@ -127,108 +127,99 @@ public class FotoCalcActivity extends Activity
 			imageWidth.setText("23.6");
 			imageHeight.setText("15.8");
 		}
-    	else if( itemId == R.id.fourThirds ) {
+		else if( itemId == R.id.fourThirds ) {
 			imageWidth.setText("17.31");
 			imageHeight.setText("12.98");
 		}
-    	else if( itemId == R.id.nikon1 ) {
+		else if( itemId == R.id.nikon1 ) {
 			imageWidth.setText("13.2");
 			imageHeight.setText("8.8");
 		}
-    	else if( itemId == R.id.SamsungA55 ) {
+		else if( itemId == R.id.SamsungA55 ) {
 			imageWidth.setText("8.16");
 			imageHeight.setText("6.12");
 		}
-    	else if( itemId == R.id.compact17 ) {
+		else if( itemId == R.id.compact17 ) {
 			imageWidth.setText("7.6");
 			imageHeight.setText("5.7");
 		}
-    	else if( itemId == R.id.compact18 ) {
+		else if( itemId == R.id.compact18 ) {
 			imageWidth.setText("7.18");
 			imageHeight.setText("5.32");
 		}
-    	else if( itemId == R.id.compact23 ) {
+		else if( itemId == R.id.compact23 ) {
 			imageWidth.setText("6.16");
 			imageHeight.setText("4.62");
 		}
-    	else if( itemId == R.id.about ) {
+		else if( itemId == R.id.about ) {
 			String name = getString(R.string.app_name);
 			String version = getString(R.string.app_version);
-			String copyinfo = getString(R.string.app_copyinfo);
+			String app_copyright = getString(R.string.app_copyright);
 			String url = getString(R.string.app_url);
 			showResult(
-					name,
-					name + " " + version + "\n" +
-							copyinfo + "\n" +
-							url
+				name,
+				name + " " + version + "\n" + app_copyright + "\n" + url
 			);
 		}
-    	else if( itemId == R.id.restart ) {
-            greyFilter.setText( "" );
-            time.setText( "" );
-            distance.setText( "" );
-            aperture.setText( "" );
-            focalLength.setText( "" );
-            imageHeight.setText( "" );
-            imageWidth.setText( "" );
-    	}
+		else if( itemId == R.id.restart ) {
+			greyFilter.setText( "" );
+			time.setText( "" );
+			distance.setText( "" );
+			aperture.setText( "" );
+			focalLength.setText( "" );
+			imageHeight.setText( "" );
+			imageWidth.setText( "" );
+		}
 
-    	return super.onOptionsItemSelected(item);
-    }
+		return super.onOptionsItemSelected(item);
+	}
 
-    @Override
-    public void onOptionsMenuClosed(Menu menu) {
-        super.onOptionsMenuClosed(menu);
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.CUR_DEVELOPMENT) {
-            // Workaround for https://issuetracker.google.com/issues/315761686
-            invalidateOptionsMenu();
-        }
-    }
-    
-    @Override
-    public void onPause()
-    {
-    	super.onPause();
-    	saveData();
-    }
-    
-    private void saveData()
-    {
-    	SharedPreferences settings = getSharedPreferences(CONFIGURATION, 0);
-        SharedPreferences.Editor editor = settings.edit();
-        editor.putString("greyFilter", greyFilter.getText().toString());
-        editor.putString("time", time.getText().toString());
-        editor.putString("distance", distance.getText().toString());
-        editor.putString("aperture", aperture.getText().toString());
-        editor.putString("focalLength", focalLength.getText().toString());
-        editor.putString("imageHeight", imageHeight.getText().toString());
-        editor.putString("imageWidth", imageWidth.getText().toString());
+	@Override
+	public void onOptionsMenuClosed(Menu menu) {
+		super.onOptionsMenuClosed(menu);
+		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.CUR_DEVELOPMENT) {
+			// Workaround for https://issuetracker.google.com/issues/315761686
+			invalidateOptionsMenu();
+		}
+	}
 
-        // Commit the edits!
-        editor.commit();
-    }
-    private void showResult( String title, String resultString )
-    {
-    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    	builder.setMessage(resultString)
-    		   .setTitle(title)
-    	       .setCancelable(false)
-    	       .setNegativeButton("Fertig", new DialogInterface.OnClickListener() {
-    	           public void onClick(DialogInterface dialog, int id) {
-    	                dialog.cancel();
-    	           }
-    	       })
-    	       .setIcon(R.drawable.foto);
-    	AlertDialog alert = builder.create();
-    	alert.show();
-    }
-    private void showTimeResult( double neueZeit, double blende )
-    {
-    	Intent intent = new Intent( this, ResultScreen.class );
-    	intent.putExtra( "neueZeit", neueZeit );
-    	intent.putExtra( "blende", blende );
-    	startActivity( intent );
-    }
+	@Override
+	public void onPause()
+	{
+		super.onPause();
+		saveData();
+	}
+
+	private void saveData()
+	{
+		getSharedPreferences(CONFIGURATION, Context.MODE_PRIVATE).edit()
+			.putString("greyFilter", greyFilter.getText().toString())
+			.putString("time", time.getText().toString())
+			.putString("distance", distance.getText().toString())
+			.putString("aperture", aperture.getText().toString())
+			.putString("focalLength", focalLength.getText().toString())
+			.putString("imageHeight", imageHeight.getText().toString())
+			.putString("imageWidth", imageWidth.getText().toString())
+			.apply()
+		;
+	}
+	private void showResult( String title, String resultString )
+	{
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage(resultString)
+			.setTitle(title)
+			.setNegativeButton("Fertig", null)
+			.setIcon(R.drawable.foto)
+			.show()
+		;
+	}
+	private void showTimeResult( double neueZeit, double blende )
+	{
+		Intent intent = new Intent( this, ResultScreen.class );
+		intent.putExtra( "neueZeit", neueZeit );
+		intent.putExtra( "blende", blende );
+		startActivity( intent );
+	}
 	private String getData( int flags, int optional )
 	{
 		String	error = "";
@@ -395,7 +386,7 @@ public class FotoCalcActivity extends Activity
 		{
 			neueZeit = m_time * m_greyFilter;
 			getData(NEED_APERTURE);
-    		showTimeResult( neueZeit, m_aperture );
+			showTimeResult( neueZeit, m_aperture );
 		}
 		else
 		{
