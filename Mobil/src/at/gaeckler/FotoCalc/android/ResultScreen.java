@@ -6,16 +6,16 @@
 		Address:		Hofmannsthalweg 14, A-4030 Linz
 		Web:			https://www.gaeckler.at/
 
-		Copyright:		(c) 1988-2024 Martin Gäckler
+		Copyright:		(c) 2013-2026 Martin Gäckler
 
-		This program is free software: you can redistribute it and/or modify  
-		it under the terms of the GNU General Public License as published by  
+		This program is free software: you can redistribute it and/or modify
+		it under the terms of the GNU General Public License as published by
 		the Free Software Foundation, version 3.
 
-		You should have received a copy of the GNU General Public License 
+		You should have received a copy of the GNU General Public License
 		along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-		THIS SOFTWARE IS PROVIDED BY Martin Gäckler, Austria, Linz ``AS IS''
+		THIS SOFTWARE IS PROVIDED BY Martin Gäckler, Linz, Austria ``AS IS''
 		AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
 		TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
 		PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR
@@ -31,28 +31,32 @@
 
 package at.gaeckler.FotoCalc.android;
 
-import android.app.Activity;
+import static at.gaeckler.FotoCalc.android.FotoCalcActivity.APERTURE_KEY;
+import static at.gaeckler.FotoCalc.android.FotoCalcActivity.TIME_KEY;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class ResultScreen extends Activity {
+import at.gaeckler.MyActivity;
 
-	double neueZeit;
-	double blende;
+public class ResultScreen extends MyActivity
+{
+	double m_newTime;
+	double m_aperture;
 	Button	buttonPrev, buttonOK, buttonNext;
-	TextView resultString;
+	TextView resultView;
 
-	public static final int[]	zeiten =
+	public static final int[] s_times =
 	{
 		1, 2, 3, 4, 5, 6, 8, 10, 13, 15, 20, 25, 30, 40, 45, 50, 60, 80,
 		90, 100, 125, 160, 180, 200, 250, 320, 350, 400, 500, 640, 750,
 		800, 1000, 1250, 1500, 1600, 2000, 2500, 3000, 3200, 4000, 8000, -1
 	};
 
-	public static final double[] blendenReihe =
+	public static final double[] s_apertures =
 	{
 		1, 1.4, 1.8, 2, 2.2, 2.4, 2.5, 2.8, 3.2, 3.3, 3.5, 4, 4.5, 4.8, 5, 5.6,
 		6.3, 6.7, 7.1, 8, 9, 9.5, 10, 11, 13, 14, 16, 18, 19, 20, 22, 32, -1
@@ -63,104 +67,90 @@ public class ResultScreen extends Activity {
 		int i;
 
 		String resultString = "";
-		if( neueZeit < 1 )
+		if( m_newTime < 1 )
 		{
-			for( i=0; zeiten[i]>0; i++ )
+			for(i=0; s_times[i]>0; i++ )
 			{
-				if( neueZeit >= 1.0/zeiten[i] )
+				if( m_newTime >= 1.0/ s_times[i] )
 					break;
 			}
 
-			if( neueZeit > 1.0/zeiten[i] )
+			if( m_newTime > 1.0/ s_times[i] )
 			{
 				if (i > 0)
-					resultString += "1/" + zeiten[i - 1] +
+					resultString += "1/" + s_times[i - 1] +
 						" > ";
-				resultString += "1/" + Math.ceil(10/neueZeit)/10;
+				resultString += "1/" + Math.ceil(10/ m_newTime)/10;
 
-				if( zeiten[i] > 0 )
+				if( s_times[i] > 0 )
 					resultString += " > ";
 			}
-			if( zeiten[i] > 0 )
-				resultString += "1/" + zeiten[i];
+			if( s_times[i] > 0 )
+				resultString += "1/" + s_times[i];
 		}
 		else
-			resultString += Math.ceil( neueZeit * 10 ) / 10 + '"';
+			resultString += Math.ceil( m_newTime * 10 ) / 10 + '"';
 		
-		if( blende > 0 )
-			resultString += "\n" + Math.ceil( blende * 10 ) / 10;
-		this.resultString.setText(resultString);
+		if( m_aperture > 0 )
+			resultString += "\n" + Math.ceil( m_aperture * 10 ) / 10;
+		resultView.setText(resultString);
 	}
 
-	protected void changeAperture( int keyCode )
+	private void changeAperture( int keyCode )
 	{
-		if( blende > 0 )
+		if( m_aperture > 0 )
 		{
 			int		i;
-			double	neueBlende = blende;
+			double	newAperture = m_aperture;
 
-			for( i=0; blendenReihe[i] > 0; i++ )
-				if( blendenReihe[i] > blende )
+			for(i=0; s_apertures[i] > 0; i++ )
+				if( s_apertures[i] > m_aperture)
 					break;
 
-			if( keyCode == 1 && blendenReihe[i]>0 )
-				neueBlende = blendenReihe[i];
+			if( keyCode == 1 && s_apertures[i]>0 )
+				newAperture = s_apertures[i];
 			else if( keyCode == -1 && i>0 )
 			{
-				neueBlende = blendenReihe[i - 1];
-				if (neueBlende == blende && i > 1)
-					neueBlende = blendenReihe[i-2];
+				newAperture = s_apertures[i - 1];
+				if (newAperture == m_aperture && i > 1)
+					newAperture = s_apertures[i-2];
 			}
-			if( neueBlende != blende )
+			if( newAperture != m_aperture)
 			{
-				double faktor = (neueBlende*neueBlende) / (blende*blende);
-				neueZeit = neueZeit * faktor;
-				blende = neueBlende;
+				double factor = (newAperture*newAperture) / (m_aperture * m_aperture);
+				m_newTime = m_newTime * factor;
+				m_aperture = newAperture;
 				makeResultString();
 			}
 		}
 	}
 
 	@Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.result_screen);
-        
-        Intent intent = getIntent();
-        neueZeit = intent.getDoubleExtra("neueZeit", 0);
-        blende = intent.getDoubleExtra("blende", -1);
+	public void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.result_screen);
 
-        buttonPrev = findViewById( R.id.buttonPrev );
-        buttonOK = findViewById( R.id.buttonOK );
-        buttonNext = findViewById( R.id.buttonNext );
-        resultString = findViewById( R.id.resultString );
-        
-        buttonOK.setOnClickListener( new View.OnClickListener() {
-			
-			public void onClick(View bttn) {
-				finish();
-			}
-		} );
-        if( blende > 0 )
-        {
-	        buttonPrev.setOnClickListener( new View.OnClickListener() {
-				
-				public void onClick(View bttn) {
-					changeAperture( -1 );
-				}
-			} );
-	        buttonNext.setOnClickListener( new View.OnClickListener() {
-				
-				public void onClick(View bttn) {
-					changeAperture( 1 );
-				}
-			} );
-        }
-        else
-        {
-        	buttonPrev.setVisibility(View.GONE);
-        	buttonNext.setVisibility(View.GONE);
-        }
-        makeResultString();
-    }
- }
+		Intent intent = getIntent();
+		m_newTime = intent.getDoubleExtra(TIME_KEY, 0);
+		m_aperture = intent.getDoubleExtra(APERTURE_KEY, -1);
+
+		buttonPrev = findViewById( R.id.buttonPrev );
+		buttonOK = findViewById( R.id.buttonOK );
+		buttonNext = findViewById( R.id.buttonNext );
+		resultView = findViewById( R.id.resultString );
+
+		buttonOK.setOnClickListener( (bttn) -> finish());
+		if( m_aperture > 0 )
+		{
+			buttonPrev.setOnClickListener( (bttn) -> changeAperture( -1 ) );
+			buttonNext.setOnClickListener( (bttn) -> changeAperture( 1 ) );
+		}
+		else
+		{
+			buttonPrev.setVisibility(View.GONE);
+			buttonNext.setVisibility(View.GONE);
+		}
+		makeResultString();
+	}
+}

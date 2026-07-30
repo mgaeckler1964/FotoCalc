@@ -6,16 +6,16 @@
 		Address:		Hofmannsthalweg 14, A-4030 Linz
 		Web:			https://www.gaeckler.at/
 
-		Copyright:		(c) 1988-2024 Martin Gäckler
+		Copyright:		(c) 2013-2026 Martin Gäckler
 
-		This program is free software: you can redistribute it and/or modify  
-		it under the terms of the GNU General Public License as published by  
+		This program is free software: you can redistribute it and/or modify
+		it under the terms of the GNU General Public License as published by
 		the Free Software Foundation, version 3.
 
-		You should have received a copy of the GNU General Public License 
+		You should have received a copy of the GNU General Public License
 		along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-		THIS SOFTWARE IS PROVIDED BY Martin Gäckler, Austria, Linz ``AS IS''
+		THIS SOFTWARE IS PROVIDED BY Martin Gäckler, Linz, Austria ``AS IS''
 		AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
 		TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
 		PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR
@@ -31,42 +31,52 @@
 
 package at.gaeckler.FotoCalc.android;
 
-import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
-import android.app.AlertDialog;
 import android.content.*;
 
-import at.gaeckler.FotoCalc.FotoCalculator;
+import androidx.appcompat.app.AppCompatDelegate;
 
-public class FotoCalcActivity extends Activity
+import at.gaeckler.FotoCalc.FotoCalculator;
+import at.gaeckler.MyActivity;
+
+public class FotoCalcActivity extends MyActivity
 {
 	// these variables are borrowed from FotoCalcForm for JavaME
-	double	m_width;
-	double	m_height;
-	double	m_picSize;
-	double	m_focalLength;
-	double	m_aperture;
-	double	m_distance;
-	double	m_time;
-	double	m_greyFilter;
-	static final int NEED_SIZE			= 1;
-	static final int NEED_FOCAL_LENGTH	= 2;
-	static final int NEED_APERTURE		= 4;
-	static final int NEED_DISTANCE		= 8;
-	static final int NEED_TIME			= 16;
-	static final int NEED_FILTER		= 32;
-	static final String CONFIGURATION = "fotoCalc.cfg";
-	
+	private double	m_width;
+	private double	m_height;
+	private double	m_picSize;
+	private double	m_focalLength;
+	private double	m_aperture;
+	private double	m_distance;
+	private double	m_time;
+	private double	m_greyFilter;
+	private static final int NEED_SIZE			= 1;
+	private static final int NEED_FOCAL_LENGTH	= 2;
+	private static final int NEED_APERTURE		= 4;
+	private static final int NEED_DISTANCE		= 8;
+	private static final int NEED_TIME			= 16;
+	private static final int NEED_FILTER		= 32;
+	private static final String CONFIGURATION = "fotoCalc.cfg";
+	private static final String			DARK_MODE_KEY = "darkMode";
+	private static final String			GREY_KEY = "greyFilter";
+	public static final String			TIME_KEY = "time";
+	private static final String			DIST_KEY = "distance";
+	public static final String			APERTURE_KEY = "aperture";
+	private static final String			FOCAL_KEY = "focalLength";
+	private static final String			HEIGHT_KEY = "imageHeight";
+	private static final String			WIDTH_KEY = "imageWidth";
+
 	EditText	greyFilter, time, distance, aperture, focalLength, imageHeight, imageWidth;
 
 	/** Called when the activity is first created. */
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState)
+	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
@@ -78,14 +88,9 @@ public class FotoCalcActivity extends Activity
 		imageHeight = findViewById( R.id.imageHeight );
 		imageWidth = findViewById( R.id.imageWidth );
 
-		SharedPreferences settings = getSharedPreferences(CONFIGURATION, 0);
-		greyFilter.setText( settings.getString("greyFilter", "") );
-		time.setText( settings.getString("time", "") );
-		distance.setText( settings.getString("distance", "") );
-		aperture.setText( settings.getString("aperture", "") );
-		focalLength.setText( settings.getString("focalLength", "") );
-		imageHeight.setText( settings.getString("imageHeight", "") );
-		imageWidth.setText( settings.getString("imageWidth", "") );
+		loadData();
+
+		switchColorMode();
 	}
 	@Override
 	public boolean onCreateOptionsMenu( android.view.Menu menu )
@@ -94,6 +99,14 @@ public class FotoCalcActivity extends Activity
 		inflater.inflate(R.menu.fc_menu, menu);
 
 		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu)
+	{
+		menu.findItem(R.id.darkMode).setChecked(m_darkMode);
+
+		return super.onPrepareOptionsMenu(menu);
 	}
 
 	@Override
@@ -170,6 +183,11 @@ public class FotoCalcActivity extends Activity
 			imageHeight.setText( "" );
 			imageWidth.setText( "" );
 		}
+		else if( itemId == R.id.darkMode )
+		{
+			m_darkMode = !m_darkMode;
+			switchColorMode();
+		}
 
 		return super.onOptionsItemSelected(item);
 	}
@@ -193,31 +211,41 @@ public class FotoCalcActivity extends Activity
 	private void saveData()
 	{
 		getSharedPreferences(CONFIGURATION, Context.MODE_PRIVATE).edit()
-			.putString("greyFilter", greyFilter.getText().toString())
-			.putString("time", time.getText().toString())
-			.putString("distance", distance.getText().toString())
-			.putString("aperture", aperture.getText().toString())
-			.putString("focalLength", focalLength.getText().toString())
-			.putString("imageHeight", imageHeight.getText().toString())
-			.putString("imageWidth", imageWidth.getText().toString())
+			.putString(GREY_KEY, greyFilter.getText().toString())
+			.putString(TIME_KEY, time.getText().toString())
+			.putString(DIST_KEY, distance.getText().toString())
+			.putString(APERTURE_KEY, aperture.getText().toString())
+			.putString(FOCAL_KEY, focalLength.getText().toString())
+			.putString(HEIGHT_KEY, imageHeight.getText().toString())
+			.putString(WIDTH_KEY, imageWidth.getText().toString())
+			.putBoolean(DARK_MODE_KEY, m_darkMode)
 			.apply()
 		;
 	}
+
+	private void loadData()
+	{
+		SharedPreferences settings = getSharedPreferences(CONFIGURATION, 0);
+
+		greyFilter.setText(settings.getString(GREY_KEY, ""));
+		time.setText(settings.getString(TIME_KEY, ""));
+		distance.setText(settings.getString(DIST_KEY, ""));
+		aperture.setText(settings.getString(APERTURE_KEY, ""));
+		focalLength.setText(settings.getString(FOCAL_KEY, ""));
+		imageHeight.setText(settings.getString(HEIGHT_KEY, ""));
+		imageWidth.setText(settings.getString(WIDTH_KEY, ""));
+		m_darkMode = settings.getBoolean(DARK_MODE_KEY, true);
+	}
+
 	private void showResult( String title, String resultString )
 	{
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage(resultString)
-			.setTitle(title)
-			.setNegativeButton("Fertig", null)
-			.setIcon(R.drawable.foto)
-			.show()
-		;
+		showMessage( R.drawable.foto, title, resultString, false, null );
 	}
 	private void showTimeResult( double neueZeit, double blende )
 	{
 		Intent intent = new Intent( this, ResultScreen.class );
-		intent.putExtra( "neueZeit", neueZeit );
-		intent.putExtra( "blende", blende );
+		intent.putExtra( TIME_KEY, neueZeit );
+		intent.putExtra( APERTURE_KEY, blende );
 		startActivity( intent );
 	}
 	private String getData( int flags, int optional )
@@ -379,18 +407,31 @@ public class FotoCalcActivity extends Activity
 	}
 	private void calcTime()
 	{
-		double	neueZeit;
+		double	newTime;
 		String	resultString = getData(NEED_TIME|NEED_FILTER);
 
 		if( m_time > 0 && m_greyFilter > 0 )
 		{
-			neueZeit = m_time * m_greyFilter;
+			newTime = m_time * m_greyFilter;
 			getData(NEED_APERTURE);
-			showTimeResult( neueZeit, m_aperture );
+			showTimeResult( newTime, m_aperture );
 		}
 		else
 		{
 			showResult( "Neue Zeit", resultString );
+		}
+	}
+
+	private boolean m_darkMode=true;
+	private void switchColorMode()
+	{
+		if( m_darkMode )
+		{
+			AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+		}
+		else
+		{
+			AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 		}
 	}
 }

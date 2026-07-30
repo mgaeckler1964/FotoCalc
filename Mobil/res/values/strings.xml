@@ -26,4 +26,5 @@
     <string name="about">Über Fotorechner</string>
     <string name="restart">Neustart</string>
     <string name="exit">Beenden</string>
+    <string name="darkMode">Darkmode</string>
 </resources>

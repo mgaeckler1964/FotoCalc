@@ -19,11 +19,11 @@ android {
 
 	defaultConfig {
 		applicationId "at.gaeckler.FotoCalc"
-		minSdk 18
+		minSdk 21
 		targetSdk 36
-		versionCode 9
-		versionName "3.7.29"
-		resValue "string", "app_version", versionName
+		versionCode 10
+		versionName "3.7.30"
+		resValue "string", "app_version", "\"${versionName}\""
 	}
 
 	sourceSets {
@@ -52,6 +52,10 @@ android {
 			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 		}
 	}
+}
+
+dependencies {
+	implementation 'androidx.appcompat:appcompat:1.7.1'
 }
 
 configurations.configureEach {

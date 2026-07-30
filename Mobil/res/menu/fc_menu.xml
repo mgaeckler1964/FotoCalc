@@ -3,28 +3,27 @@
   xmlns:android="http://schemas.android.com/apk/res/android">
   	<item android:visible="true" android:id="@+id/calcMenu" android:enabled="true" android:title="@string/calcMenu">
   		<menu>
-		    <item android:visible="true" android:enabled="true" android:title="@string/calcDOF" android:id="@+id/calcDOF"></item>
-		    <item android:title="@string/calcAngle" android:id="@+id/calcAngle"></item>
-		    <item android:id="@+id/calcHyperDistance" android:enabled="true" android:title="@string/calcHyperDistance" android:visible="true"></item>
-		    <item android:visible="true" android:title="@string/calcSizeFactor" android:enabled="true" android:id="@+id/calcSizeFactor"></item>
-		    <item android:visible="true" android:id="@+id/calcTime" android:title="@string/calcTime" android:enabled="true"></item>
+		    <item android:visible="true" android:enabled="true" android:title="@string/calcDOF" android:id="@+id/calcDOF"/>
+		    <item android:title="@string/calcAngle" android:id="@+id/calcAngle"/>
+		    <item android:id="@+id/calcHyperDistance" android:enabled="true" android:title="@string/calcHyperDistance" android:visible="true"/>
+		    <item android:visible="true" android:title="@string/calcSizeFactor" android:enabled="true" android:id="@+id/calcSizeFactor"/>
+		    <item android:visible="true" android:id="@+id/calcTime" android:title="@string/calcTime" android:enabled="true"/>
   		</menu>
   	</item>
     <item android:title="@string/standardSize" android:visible="true" android:id="@+id/standardSize" android:enabled="true">
     	<menu>
-    		<item android:visible="true" android:enabled="true" android:title="@string/SmallPicture" android:id="@+id/SmallPicture"></item>
-    		<item android:visible="true" android:enabled="true" android:title="APS (Nikon)" android:id="@+id/apsNikon"></item>
-    		<item android:visible="true" android:enabled="true" android:title="(Micro) Four Thirds" android:id="@+id/fourThirds"></item>
-    		<item android:visible="true" android:enabled="true" android:title="Nikon-1" android:id="@+id/nikon1"></item>
-    		<item android:visible="true" android:enabled="true" android:title='Samsung A55' android:id="@+id/SamsungA55"></item>
-    		<item android:visible="true" android:enabled="true" android:title='1/1,7"' android:id="@+id/compact17"></item>
-    		<item android:visible="true" android:enabled="true" android:title='1/1,8"' android:id="@+id/compact18"></item>
-    		<item android:visible="true" android:enabled="true" android:title='1/2,3"' android:id="@+id/compact23"></item>
+    		<item android:visible="true" android:enabled="true" android:title="@string/SmallPicture" android:id="@+id/SmallPicture"/>
+    		<item android:visible="true" android:enabled="true" android:title="APS (Nikon)" android:id="@+id/apsNikon"/>
+    		<item android:visible="true" android:enabled="true" android:title="(Micro) Four Thirds" android:id="@+id/fourThirds"/>
+    		<item android:visible="true" android:enabled="true" android:title="Nikon-1" android:id="@+id/nikon1"/>
+    		<item android:visible="true" android:enabled="true" android:title='Samsung A55' android:id="@+id/SamsungA55"/>
+    		<item android:visible="true" android:enabled="true" android:title='1/1,7"' android:id="@+id/compact17"/>
+    		<item android:visible="true" android:enabled="true" android:title='1/1,8"' android:id="@+id/compact18"/>
+    		<item android:visible="true" android:enabled="true" android:title='1/2,3"' android:id="@+id/compact23"/>
     	</menu>
 	</item>
-	<item android:title="@string/about" android:id="@+id/about" android:visible="true" android:enabled="true"></item>
-	<item android:enabled="true" android:id="@+id/restart" android:title="@string/restart" android:visible="true"></item>
-	<item android:visible="true" android:enabled="true" android:title="@string/exit" android:id="@+id/exit"></item>
-	
-	
+    <item android:visible="true" android:title="@string/darkMode" android:id="@+id/darkMode" android:checkable="true" android:checked="false" android:enabled="true" />
+	<item android:title="@string/about" android:id="@+id/about" android:visible="true" android:enabled="true" />
+	<item android:enabled="true" android:id="@+id/restart" android:title="@string/restart" android:visible="true" />
+	<item android:visible="true" android:enabled="true" android:title="@string/exit" android:id="@+id/exit" />
 </menu>
