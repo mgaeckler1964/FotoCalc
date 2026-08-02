@@ -1,7 +1,10 @@
-# FotoCalc
+﻿# FotoCalc
 Fotografische Berechnungen wie Schärfentiefe oder hyperfokale Distanz etc.
 
-Zum Übersetzen benötigst Du einen C++ Compiler, Android Studio oder Java ME.
+Zum Übersetzen benötigst Du einen C++ Compiler oder Android Studio
+
+Die Java ME spezifischen Sourcen wurden 2020 in das Archiv verschoben. Das Modul, das für beide
+Welten verwendet wurde, kann nur noch Android und ist unter JavaME nicht mehr übersetzbar.
 
 Fertige Binaries gibt's hier: https://www.gaeckler.at/Software/software.htm#FotoCalc
 

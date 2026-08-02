@@ -1,4 +1,4 @@
-Fotorechner 1.1.1 für Windows - (c) 2010-2021 by Martin Gäckler
+Fotorechner 1.1.1 für Windows - (c) 2010-2026 by Martin Gäckler
 ===============================================================
 
 Dieses Programm berechnet verschiedene Werte der Fotografie. Dabei ist 
@@ -49,7 +49,7 @@ Object size, picture size, distance, focal length, factor and aperture.
 
 The following values will be calculated:
 
-Picture angle      : based on focal length and picture size
+Angle of view      : based on focal length and picture size
 Picture size       : based on object size and factor.
 Distance           : based on factor and focal length.
 Factor             : based on distance and focal length if available

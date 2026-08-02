@@ -1,30 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Mobiler Fotorechner</string>
+    <string name="app_name">Mobile Foto Calc</string>
     <string name="app_copyright">&#169; 2011&#8211;2026 by Martin Gäckler</string>
     <string name="app_url">https://www.gaeckler.at/</string>
-    
-    <string name="imageWidth">Breite [mm]</string>
-    <string name="imageHeight">Höhe [mm]</string>
-    <string name="focalLength">Brennweite [mm]</string>
-    <string name="aperture">Blende</string>
-    <string name="distance">Entfernung [m]</string>
-    <string name="time">Zeit [1/s]</string>
-    <string name="greyFilter">Graufilter</string>
 
-    <string name="resultLabel">Neue Zeit</string>
-    <string name="buttonOK">Fertig</string>
+    <string name="imageWidth">Width [mm]</string>
+    <string name="imageHeight">Height [mm]</string>
+    <string name="width">Width</string>
+    <string name="height">Height</string>
+    <string name="focalLength">Focal Length [mm]</string>
+    <string name="aperture">Aperture</string>
+    <string name="distance">Distance [m]</string>
+    <string name="time">Time [1/s]</string>
+    <string name="greyFilter">Grey Filter</string>
 
-    <string name="calcMenu">Berechnungen</string>
-    <string name="calcDOF">Schärfentiefe</string>
-    <string name="calcAngle">Bildwinkel/KB Brennweite/Crop</string>
-    <string name="calcHyperDistance">Hyperfokale Entfernung</string>
-    <string name="calcSizeFactor">Vergrößerungsfaktor</string>
-    <string name="calcTime">Zeit</string>
-    <string name="standardSize">Größe</string>
-    <string name="SmallPicture">Kleinbild</string>
-    <string name="about">Über Fotorechner</string>
-    <string name="restart">Neustart</string>
-    <string name="exit">Beenden</string>
+    <string name="wrongData">Wrong Data</string>
+    <string name="dofResult1">"Depth Of Field from "</string>
+    <string name="dofResult2">" to "</string>
+    <string name="infinity">infinity</string>
+    <string name="focalLength135">35mm equivalent focal-length</string>
+    <string name="cropFactor">Crop Factor</string>
+    <string name="HyperDistanceFrom">"Hyperfocal Distance from "</string>
+    <string name="sizeFactorFrom">"Size Factor from "</string>
+    <string name="sizeFactorError">"Size factor cannot be calculated."</string>
+
+    <string name="angleOfView">Angle of View</string>
+    <string name="newTimeLabel">New Time</string>
+    <string name="buttonOK">Ready</string>
+
+    <string name="badGreyFilter">Grey filter missing or wrong format.</string>
+    <string name="badTime">Time missing or wrong format.</string>
+    <string name="badDistance">Distance missing or wrong format.</string>
+    <string name="badAperture">Aperture missing or wrong format.</string>
+    <string name="badFocalLength">Focal length missing or wrong format.</string>
+    <string name="badHeight">Height missing or wrong format.</string>
+    <string name="badWidth">Width missing or wrong format.</string>
+
+    <string name="calcMenu">Calculations</string>
+    <string name="calcDOF">Depth Of Field</string>
+    <string name="calcAngle">Angle of View/KB Focal Length/Crop</string>
+    <string name="calcHyperDistance">Hyperfocal Distance</string>
+    <string name="calcSizeFactor">Size factor</string>
+    <string name="calcTime">Time</string>
+    <string name="standardSize">Size</string>
+    <string name="SmallPicture">135 Film</string>
+    <string name="about">About Foto Calc</string>
+    <string name="restart">Restart</string>
+    <string name="exit">Exit</string>
     <string name="darkMode">Darkmode</string>
 </resources>

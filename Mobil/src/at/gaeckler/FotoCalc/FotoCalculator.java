@@ -31,6 +31,12 @@
 
 package at.gaeckler.FotoCalc;
 
+import android.content.Context;
+
+import java.util.Locale;
+
+import at.gaeckler.FotoCalc.android.R;
+
 public class FotoCalculator
 {
 	static private double atan( double tangens )
@@ -58,74 +64,74 @@ public class FotoCalculator
 		return angle;
 	}
 
-	static public String calcAngle( double bildGroesse, double brennweite )
+	static public String calcAngle( Context context, double bildGroesse, double brennweite )
 	{
-		String	resultString = "Falsche Daten";
+		String	resultString = context.getString(R.string.wrongData);
 
 		if( bildGroesse > 0 && brennweite > 0 )
 		{
-			resultString = "Bildwinkel: ";
+			resultString = context.getString(R.string.angleOfView) +": ";
 			double bildwinkel = 360 * atan( bildGroesse / (2*brennweite) ) / Math.PI;
-			resultString += String.valueOf( Math.ceil( bildwinkel * 10)/10 );
-			resultString += " Grad";
+			resultString += String.format(Locale.getDefault(), "%.2f", Math.ceil( bildwinkel * 10)/10 );
+			resultString += " °";
 
-			resultString += "\nKB Brennweite: ";
+			resultString += "\n"+ context.getString(R.string.focalLength135) +": ";
 			double	kbSize = Math.sqrt(36 * 36 + 24 * 24);
 			double cropFactor = kbSize / bildGroesse;
 			double kbLength = cropFactor * brennweite;
-			resultString += String.valueOf( Math.ceil( kbLength * 10)/10 ) + " mm";
+			resultString += String.format(Locale.getDefault(), "%.2f mm", Math.ceil( kbLength * 10)/10);
 
-			resultString += "\nCropfaktor: ";
-			resultString += String.valueOf( Math.ceil( cropFactor * 10)/10 );
+			resultString += "\n"+context.getString(R.string.cropFactor)+": ";
+			resultString += String.format(Locale.getDefault(), "%.2f", Math.ceil( cropFactor * 10)/10 );
 		}
 
 		return resultString;
 	}
-	static public String calcDOF(double bildGroesse, double brennweite, double blende, double distanz)
+	static public String calcDOF(Context context, double bildGroesse, double brennweite, double blende, double distanz)
 	{
-		String	resultString = "Falsche Daten";
+		String	resultString = context.getString(R.string.wrongData);
 
 		if( bildGroesse > 0 && brennweite > 0 && blende > 0 && distanz > 0 )
 		{
-			resultString = "Schärfentiefe von ";
+			resultString = context.getString(R.string.dofResult1);
 			double zerstreuungskreis = bildGroesse/1500;
 			double hyperfokaleEntfernung = brennweite*brennweite / (blende*zerstreuungskreis) + brennweite;
 
 			double minDistanz = distanz*hyperfokaleEntfernung / (hyperfokaleEntfernung+distanz-brennweite);
-			resultString += String.valueOf( Math.ceil( minDistanz )/1000 ) + " m";
+			resultString += String.format(Locale.getDefault(), "%.2f", Math.ceil( minDistanz )/1000 ) + " m";
 
-			resultString += " bis ";
+			resultString += context.getString(R.string.dofResult2);
 			double quotient = hyperfokaleEntfernung-distanz+brennweite;
 			if( quotient > 0 )
 			{
 				double maxDistanz = distanz*hyperfokaleEntfernung / quotient;
-				resultString += String.valueOf( Math.ceil( maxDistanz )/1000 ) + " m";
+				resultString += String.format(Locale.getDefault(), "%.2f", Math.ceil( maxDistanz )/1000 ) + " m";
 			}
 			else
 			{
-				resultString += "unendlich";
+				resultString += context.getString(R.string.infinity);
 			}
 		}
 		return resultString;
 	}
-	static public String calcHyperDistance(double bildGroesse, double brennweite, double blende)
+	static public String calcHyperDistance(Context context, double bildGroesse, double brennweite, double blende)
 	{
-		String	resultString = "Falsche Daten";
+		String	resultString = context.getString(R.string.wrongData);
 
 		if( bildGroesse > 0 && brennweite > 0 && blende > 0 )
 		{
-			resultString = "Hyperfokale Entfernung von ";
+			resultString = context.getString(R.string.HyperDistanceFrom);
 			double zerstreuungskreis = bildGroesse/1500;
 			double hyperfokaleEntfernung = brennweite*brennweite / (blende*zerstreuungskreis) + brennweite;
-			resultString += String.valueOf( Math.ceil( hyperfokaleEntfernung )/1000 ) + " m";
+			resultString += String.format(Locale.getDefault(), "%.2f", Math.ceil( hyperfokaleEntfernung )/1000 ) + " m";
 		}
 
 		return resultString;
 	}
-	static public String calcSizeFactor( double distanz, double brennweite, double bildBreite, double bildHoehe )
+	static public String calcSizeFactor( Context context, double distanz, double brennweite, double bildBreite, double bildHoehe )
 	{
 		double	vergrFaktor = 0.0;
-		String	resultString = "Falsche Daten";
+		String	resultString = context.getString(R.string.wrongData);
 
 		if( distanz>0 && brennweite>0 )
 		{
@@ -138,23 +144,23 @@ public class FotoCalculator
 		}
 		if( vergrFaktor > 0.005 )
 		{
-			resultString = "Vergr��erungsfaktor von ";
-			resultString += String.valueOf( Math.ceil( vergrFaktor * 10 )/10 );
+			resultString = context.getString(R.string.sizeFactorFrom);
+			resultString += String.format(Locale.getDefault(), "%.2f", Math.ceil( vergrFaktor * 10 )/10 );
 			if( bildBreite > 0 )
 			{
-				resultString += "\nBreite: ";
-				resultString += String.valueOf( Math.ceil( bildBreite * vergrFaktor * 10 )/10 );
+				resultString += "\n" + context.getString(R.string.width) +" : ";
+				resultString += String.format(Locale.getDefault(), "%.2f", Math.ceil( bildBreite * vergrFaktor * 10 )/10 );
 				resultString += "mm";
 			}
 			if( bildHoehe > 0 )
 			{
-				resultString += "\nH�he: ";
-				resultString += String.valueOf( Math.ceil( bildHoehe * vergrFaktor * 10 )/10 );
+				resultString += "\n" + context.getString(R.string.height) +" : ";
+				resultString += String.format(Locale.getDefault(), "%.2f", Math.ceil( bildHoehe * vergrFaktor * 10 )/10 );
 				resultString += "mm";
 			}
 		}
 		else if( vergrFaktor < 0 )
-			resultString = "Vergr��erungsfaktor kann nicht berechnet werden.";
+			resultString = context.getString(R.string.sizeFactorError);
 
 		return resultString;
 	}

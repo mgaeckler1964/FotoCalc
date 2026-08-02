@@ -1,4 +1,4 @@
-Fotorechner 1.1.1 für JavaME und Android - (c) 2011-2021 by Martin Gäckler
+Fotorechner 3.8.2 für Android -            (c) 2011-2026 by Martin Gäckler
 ==========================================================================
 
 Dieses Programm berechnet verschiedene Werte der Fotografie. Dabei ist 

@@ -33,13 +33,20 @@ package at.gaeckler.FotoCalc.android;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.content.*;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
+
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Locale;
 
 import at.gaeckler.FotoCalc.FotoCalculator;
 import at.gaeckler.MyActivity;
@@ -137,32 +144,32 @@ public class FotoCalcActivity extends MyActivity
 			imageHeight.setText("24");
 		}
 		else if( itemId == R.id.apsNikon ) {
-			imageWidth.setText("23.6");
-			imageHeight.setText("15.8");
+			imageWidth.setText(String.format(Locale.getDefault(), "%.1f", 23.6));
+			imageHeight.setText(String.format(Locale.getDefault(), "%.1f", 15.8));
 		}
 		else if( itemId == R.id.fourThirds ) {
-			imageWidth.setText("17.31");
-			imageHeight.setText("12.98");
+			imageWidth.setText(String.format(Locale.getDefault(), "%.2f", 17.31));
+			imageHeight.setText(String.format(Locale.getDefault(), "%.2f", 12.98));
 		}
 		else if( itemId == R.id.nikon1 ) {
-			imageWidth.setText("13.2");
-			imageHeight.setText("8.8");
+			imageWidth.setText(String.format(Locale.getDefault(), "%.1f", 13.2));
+			imageHeight.setText(String.format(Locale.getDefault(), "%.1f", 8.8));
 		}
 		else if( itemId == R.id.SamsungA55 ) {
-			imageWidth.setText("8.16");
-			imageHeight.setText("6.12");
+			imageWidth.setText(String.format(Locale.getDefault(), "%.2f", 8.16));
+			imageHeight.setText(String.format(Locale.getDefault(), "%.2f", 6.12));
 		}
 		else if( itemId == R.id.compact17 ) {
-			imageWidth.setText("7.6");
-			imageHeight.setText("5.7");
+			imageWidth.setText(String.format(Locale.getDefault(), "%.1f", 7.6));
+			imageHeight.setText(String.format(Locale.getDefault(), "%.1f", 5.7));
 		}
 		else if( itemId == R.id.compact18 ) {
-			imageWidth.setText("7.18");
-			imageHeight.setText("5.32");
+			imageWidth.setText(String.format(Locale.getDefault(), "%.2f", 7.18));
+			imageHeight.setText(String.format(Locale.getDefault(), "%.2f", 5.32));
 		}
 		else if( itemId == R.id.compact23 ) {
-			imageWidth.setText("6.16");
-			imageHeight.setText("4.62");
+			imageWidth.setText(String.format(Locale.getDefault(), "%.2f", 6.16));
+			imageHeight.setText(String.format(Locale.getDefault(), "%.2f", 4.62));
 		}
 		else if( itemId == R.id.about ) {
 			String name = getString(R.string.app_name);
@@ -227,13 +234,44 @@ public class FotoCalcActivity extends MyActivity
 	{
 		SharedPreferences settings = getSharedPreferences(CONFIGURATION, 0);
 
-		greyFilter.setText(settings.getString(GREY_KEY, ""));
-		time.setText(settings.getString(TIME_KEY, ""));
-		distance.setText(settings.getString(DIST_KEY, ""));
-		aperture.setText(settings.getString(APERTURE_KEY, ""));
-		focalLength.setText(settings.getString(FOCAL_KEY, ""));
-		imageHeight.setText(settings.getString(HEIGHT_KEY, ""));
-		imageWidth.setText(settings.getString(WIDTH_KEY, ""));
+		char localSeparator = DecimalFormatSymbols.getInstance().getDecimalSeparator();
+
+		greyFilter.setText(
+			settings
+			.getString(GREY_KEY, "")
+			.replace('.', localSeparator)
+			.replace(',', localSeparator)
+		);
+		time.setText(
+			settings.getString(TIME_KEY, "")
+			.replace('.', localSeparator)
+			.replace(',', localSeparator)
+		);
+		distance.setText(
+			settings.getString(DIST_KEY, "")
+			.replace('.', localSeparator)
+			.replace(',', localSeparator)
+		);
+		aperture.setText(
+			settings.getString(APERTURE_KEY, "")
+			.replace('.', localSeparator)
+			.replace(',', localSeparator)
+		);
+		focalLength.setText(
+			settings.getString(FOCAL_KEY, "")
+			.replace('.', localSeparator)
+			.replace(',', localSeparator)
+		);
+		imageHeight.setText(
+			settings.getString(HEIGHT_KEY, "")
+			.replace('.', localSeparator)
+			.replace(',', localSeparator)
+		);
+		imageWidth.setText(
+			settings.getString(WIDTH_KEY, "")
+			.replace('.', localSeparator)
+			.replace(',', localSeparator)
+		);
 		m_darkMode = settings.getBoolean(DARK_MODE_KEY, true);
 	}
 
@@ -248,6 +286,25 @@ public class FotoCalcActivity extends MyActivity
 		intent.putExtra( APERTURE_KEY, blende );
 		startActivity( intent );
 	}
+
+	private double parseInternationalDouble(@NonNull String input) throws NumberFormatException
+	{
+		try
+		{
+			char localSeparator = DecimalFormatSymbols.getInstance().getDecimalSeparator();
+			input = input.replace('.', localSeparator);
+			input = input.replace(',', localSeparator);
+			NumberFormat format = NumberFormat.getInstance(Locale.getDefault());
+			Number number = format.parse(input);
+			double res = number.doubleValue();
+			return res;
+		}
+		catch(ParseException e)
+		{
+			throw new NumberFormatException(input);
+		}
+	}
+
 	private String getData( int flags, int optional )
 	{
 		String	error = "";
@@ -265,12 +322,14 @@ public class FotoCalcActivity extends MyActivity
 		{
 			try
 			{
-				m_greyFilter = Double.parseDouble(greyFilter.getText().toString());
+				m_greyFilter = parseInternationalDouble(greyFilter.getText().toString());
 			}
 			catch (NumberFormatException e)
 			{
-				if( (optional & NEED_FILTER) == 0 )
-					error = "Graufilter fehlt oder hat falsches Format";
+				if((optional & NEED_FILTER) == 0)
+				{
+					error = getString(R.string.badGreyFilter);
+				}
 			}
 		}
 
@@ -279,14 +338,18 @@ public class FotoCalcActivity extends MyActivity
 			try
 			{
 				String timeStr = time.getText().toString();
-				m_time = Double.parseDouble(timeStr);
-				if (timeStr.indexOf('.') < 0)
+				m_time = parseInternationalDouble(timeStr);
+				if(timeStr.indexOf('.') < 0 && timeStr.indexOf(',') < 0)
+				{
 					m_time = 1.0 / m_time;
+				}
 			}
 			catch (NumberFormatException e)
 			{
-				if( (optional & NEED_TIME) == 0 )
-					error = "Belichtungszeit fehlt oder hat falsches Format";
+				if((optional & NEED_TIME) == 0)
+				{
+					error = getString(R.string.badTime);
+				}
 			}
 		}
 
@@ -294,13 +357,15 @@ public class FotoCalcActivity extends MyActivity
 		{
 		try
 			{
-				m_distance = Double.parseDouble(distance.getText().toString());
+				m_distance = parseInternationalDouble(distance.getText().toString());
 				m_distance *= 1000;
 			}
 			catch (NumberFormatException e)
 			{
-				if( (optional & NEED_DISTANCE) == 0 )
-					error = "Entfernung fehlt oder hat falsches Format";
+				if((optional & NEED_DISTANCE) == 0)
+				{
+					error = getString(R.string.badDistance);
+				}
 			}
 		}
 
@@ -308,12 +373,14 @@ public class FotoCalcActivity extends MyActivity
 		{
 			try
 			{
-				m_aperture = Double.parseDouble(aperture.getText().toString());
+				m_aperture = parseInternationalDouble(aperture.getText().toString());
 			}
 			catch (NumberFormatException e)
 			{
-				if( (optional & NEED_APERTURE) == 0 )
-					error = "Blende fehlt oder hat falsches Format";
+				if((optional & NEED_APERTURE) == 0)
+				{
+					error = getString(R.string.badAperture);
+				}
 			}
 		}
 
@@ -321,12 +388,14 @@ public class FotoCalcActivity extends MyActivity
 		{
 			try
 			{
-				m_focalLength = Double.parseDouble(focalLength.getText().toString());
+				m_focalLength = parseInternationalDouble(focalLength.getText().toString());
 			}
 			catch (NumberFormatException e)
 			{
-				if( (optional & NEED_FOCAL_LENGTH) == 0 )
-					error = "Brennweite fehlt oder hat falsches Format";
+				if((optional & NEED_FOCAL_LENGTH) == 0)
+				{
+					error = getString(R.string.badFocalLength);
+				}
 			}
 		}
 
@@ -334,24 +403,30 @@ public class FotoCalcActivity extends MyActivity
 		{
 			try
 			{
-				m_height = Double.parseDouble(imageHeight.getText().toString());
+				m_height = parseInternationalDouble(imageHeight.getText().toString());
 			}
 			catch (NumberFormatException e)
 			{
-				if( (optional & NEED_SIZE) == 0 )
-					error = "Höhe fehlt oder hat falsches Format";
+				if((optional & NEED_SIZE) == 0)
+				{
+					error = getString(R.string.badHeight);
+				}
 			}
 			try
 			{
-				m_width = Double.parseDouble(imageWidth.getText().toString());
+				m_width = parseInternationalDouble(imageWidth.getText().toString());
 			}
 			catch (NumberFormatException e)
 			{
-				if( (optional & NEED_SIZE) == 0 )
-					error = "Breite fehlt oder hat falsches Format";
+				if((optional & NEED_SIZE) == 0)
+				{
+					error = getString(R.string.badWidth);
+				}
 			}
-			if( m_width > 0 && m_height > 0 )
+			if(m_width > 0 && m_height > 0)
+			{
 				m_picSize = Math.sqrt(m_width * m_width + m_height * m_height);
+			}
 		}
 
 		return error;
@@ -367,10 +442,10 @@ public class FotoCalcActivity extends MyActivity
 
 		if( m_picSize > 0 && m_focalLength > 0 )
 		{
-			resultString = FotoCalculator.calcAngle( m_picSize, m_focalLength );
+			resultString = FotoCalculator.calcAngle( this, m_picSize, m_focalLength );
 		}
 
-		showResult( "Bildwinkel", resultString );
+		showResult( getString(R.string.angleOfView), resultString );
 	}
 	private void calcDOF()
 	{
@@ -378,9 +453,9 @@ public class FotoCalcActivity extends MyActivity
 
 		if( m_picSize > 0 && m_focalLength > 0 && m_aperture > 0 && m_distance > 0 )
 		{
-			resultString = FotoCalculator.calcDOF(m_picSize, m_focalLength, m_aperture, m_distance);
+			resultString = FotoCalculator.calcDOF(this, m_picSize, m_focalLength, m_aperture, m_distance);
 		}
-		showResult( "Schärfentiefe", resultString );
+		showResult( getString(R.string.calcDOF), resultString );
 	}
 	private void calcHyperDistance()
 	{
@@ -388,10 +463,10 @@ public class FotoCalcActivity extends MyActivity
 
 		if( m_picSize > 0 && m_focalLength > 0 && m_aperture > 0 )
 		{
-			resultString = FotoCalculator.calcHyperDistance(m_picSize, m_focalLength, m_aperture);
+			resultString = FotoCalculator.calcHyperDistance(this, m_picSize, m_focalLength, m_aperture);
 		}
 
-		showResult( "Hyperfokale Entfernung", resultString );
+		showResult( getString(R.string.calcHyperDistance), resultString );
 	}
 
 	private void calcSizeFactor()
@@ -400,10 +475,10 @@ public class FotoCalcActivity extends MyActivity
 
 		if( m_distance>0 && m_focalLength>0 )
 		{
-			resultString = FotoCalculator.calcSizeFactor( m_distance, m_focalLength, m_width, m_height );
+			resultString = FotoCalculator.calcSizeFactor( this, m_distance, m_focalLength, m_width, m_height );
 		}
 
-		showResult( "Vergrößerungsfaktor", resultString );
+		showResult( getString(R.string.calcSizeFactor), resultString );
 	}
 	private void calcTime()
 	{
@@ -418,7 +493,7 @@ public class FotoCalcActivity extends MyActivity
 		}
 		else
 		{
-			showResult( "Neue Zeit", resultString );
+			showResult( getString(R.string.newTimeLabel), resultString );
 		}
 	}
 
