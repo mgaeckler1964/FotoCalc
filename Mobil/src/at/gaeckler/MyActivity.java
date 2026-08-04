@@ -104,10 +104,9 @@ public class MyActivity extends AppCompatActivity
 			input = input
 					.replace('.', localSeparator)
 					.replace(',', localSeparator);
-			NumberFormat format = NumberFormat.getInstance(Locale.getDefault());
-			Number number = format.parse(input);
-			double res = number.doubleValue();
-			return res;
+			return  NumberFormat.getInstance(Locale.getDefault())
+					.parse(input)
+					.doubleValue();
 		}
 		catch(ParseException e)
 		{
