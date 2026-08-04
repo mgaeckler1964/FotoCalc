@@ -33,19 +33,15 @@ package at.gaeckler.FotoCalc.android;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.content.*;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import java.text.DecimalFormatSymbols;
-import java.text.NumberFormat;
-import java.text.ParseException;
 import java.util.Locale;
 
 import at.gaeckler.FotoCalc.FotoCalculator;
@@ -285,24 +281,6 @@ public class FotoCalcActivity extends MyActivity
 		intent.putExtra( TIME_KEY, neueZeit );
 		intent.putExtra( APERTURE_KEY, blende );
 		startActivity( intent );
-	}
-
-	private double parseInternationalDouble(@NonNull String input) throws NumberFormatException
-	{
-		try
-		{
-			char localSeparator = DecimalFormatSymbols.getInstance().getDecimalSeparator();
-			input = input.replace('.', localSeparator);
-			input = input.replace(',', localSeparator);
-			NumberFormat format = NumberFormat.getInstance(Locale.getDefault());
-			Number number = format.parse(input);
-			double res = number.doubleValue();
-			return res;
-		}
-		catch(ParseException e)
-		{
-			throw new NumberFormatException(input);
-		}
 	}
 
 	private String getData( int flags, int optional )
