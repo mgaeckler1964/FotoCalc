@@ -6,7 +6,7 @@
 		Address:		Hofmannsthalweg 14, A-4030 Linz
 		Web:			https://www.gaeckler.at/
 
-		Copyright:		(c) 1988-2025 Martin Gäckler
+		Copyright:		(c) 1988-2026 Martin Gäckler
 
 		This program is free software: you can redistribute it and/or modify  
 		it under the terms of the GNU General Public License as published by  
@@ -133,20 +133,20 @@ class FotoMainWindow : public FotoFORM_form
 	void EditVergrFaktorChange(EditControl *Sender);
 	void EditBlendeChange(EditControl *Sender);
 
-	virtual ProcessStatus handleCreate();
-	virtual ProcessStatus handleCommand( int cmd );
-	virtual ProcessStatus handleEditChange( int control );
-	virtual ProcessStatus handleButtonClick( int control );
+	ProcessStatus handleCreate() override;
+	ProcessStatus handleCommand( int cmd ) override;
+	ProcessStatus handleEditChange( int control ) override;
+	ProcessStatus handleButtonClick( int control ) override;
 
 public:
-	FotoMainWindow() : FotoFORM_form( NULL ) 
+	FotoMainWindow() : FotoFORM_form( nullptr ) 
 	{
 	}
 };
 
 class FotoCalcApplication : public GuiApplication
 {
-	virtual bool startApplication( HINSTANCE /*hInstance*/, const char * /*cmdLine*/ )
+	bool startApplication( HINSTANCE /*hInstance*/, const char * /*cmdLine*/ ) override
 	{
 		setApplication("Foto");
 		setCompany("gak");
@@ -155,7 +155,7 @@ class FotoCalcApplication : public GuiApplication
 		setCountry( language );
 		return 0;
 	}
-	virtual CallbackWindow  *createMainWindow( const char * /*cmdLine*/, int /*nCmdShow*/ )
+	CallbackWindow  *createMainWindow( const char * /*cmdLine*/, int /*nCmdShow*/ ) override
 	{
 		std::unique_ptr<FotoMainWindow>	mainWindow( new FotoMainWindow );
 		if( mainWindow->create( nullptr ) == scERROR )
@@ -167,7 +167,7 @@ class FotoCalcApplication : public GuiApplication
 
 		return mainWindow.release();
 	}
-	virtual void deleteMainWindow( BasicWindow  *mainWindow )
+	void deleteMainWindow( BasicWindow  *mainWindow ) override
 	{
 		delete mainWindow;
 	}
@@ -641,7 +641,7 @@ ProcessStatus FotoMainWindow::handleButtonClick( int buttonID )
 		case ButtonLanguage_id:
 		{
 			char buffer[1024];
-			GetModuleFileName( NULL, buffer, sizeof( buffer ) );
+			GetModuleFileName( nullptr, buffer, sizeof( buffer ) );
 			STRING oldLanguage = appObject->getCountry();
 			doLogValue(oldLanguage);
 
